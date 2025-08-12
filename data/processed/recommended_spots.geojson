@@ -1,0 +1,1512 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Italian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Italian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Italian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Italian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Italian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Italian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Indian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Indian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Indian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Indian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Indian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Indian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "French restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for French restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "French restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for French restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "French restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for French restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Seafood restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Seafood restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Seafood restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Seafood restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Seafood restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Seafood restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Chinese restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Chinese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Chinese restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Chinese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Chinese restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Chinese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Japanese restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Japanese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Japanese restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Japanese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Japanese restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Japanese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Mexican restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Mexican restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Mexican restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Mexican restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Mexican restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.75,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Mexican restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Thai restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Thai restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Thai restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Thai restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Thai restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Thai restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Korean restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Korean restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Korean restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Korean restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Korean restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Korean restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Middle Eastern restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Middle Eastern restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Middle Eastern restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Middle Eastern restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Middle Eastern restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Middle Eastern restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Spanish restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Spanish restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Spanish restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Spanish restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Spanish restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Spanish restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Pacific Northwest restaurant (Canada)",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Pacific Northwest restaurant (Canada) - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Pacific Northwest restaurant (Canada)",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Pacific Northwest restaurant (Canada) - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Pacific Northwest restaurant (Canada)",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Pacific Northwest restaurant (Canada) - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Canadian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Canadian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Canadian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Canadian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Canadian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Canadian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Steak house",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Steak house - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Steak house",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Steak house - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Steak house",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Steak house - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Fine dining restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Fine dining restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Fine dining restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Fine dining restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Fine dining restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Fine dining restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Breakfast restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Breakfast restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Breakfast restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Breakfast restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Breakfast restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Breakfast restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Ramen restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Ramen restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Ramen restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Ramen restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Ramen restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Ramen restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Peruvian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Peruvian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Peruvian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Peruvian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Peruvian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Peruvian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vegan restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Vegan restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vegan restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Vegan restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vegan restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Vegan restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Asian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Asian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Asian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Asian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Asian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Asian restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vietnamese restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Vietnamese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vietnamese restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Vietnamese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vietnamese restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Vietnamese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Greek restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Greek restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Greek restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Greek restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Greek restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Greek restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Turkish restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Turkish restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Turkish restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Turkish restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Turkish restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Turkish restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Lebanese restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Lebanese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Lebanese restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Lebanese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Lebanese restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Lebanese restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.211,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Sushi restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Sushi restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.20320833333334,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Sushi restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Sushi restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19541666666666,
+          49.204
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Sushi restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.72,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Vancouver",
+        "recommendation_reason": "Low competition area for Sushi restaurant - opportunity for market entry",
+        "confidence": 0.0
+      }
+    }
+  ],
+  "properties": {
+    "title": "Vancouver Restaurant Location Recommendations by Cuisine",
+    "description": "AI-generated optimal locations for new restaurants by cuisine type",
+    "generated_date": "2025-08-12T17:22:28.017879",
+    "total_recommendations": 75,
+    "cuisine_types_analyzed": 25
+  }
+}
