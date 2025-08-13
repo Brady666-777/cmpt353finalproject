@@ -176,41 +176,7 @@ def run_full_pipeline():
     print("📈 Models trained and ready for predictions")
     return True
 
-def show_help():
-    """Show help message"""
-    print(__doc__)
-    
-    print("\nProject Structure:")
-    print("├── src/                     # Data processing scripts")
-    print("├── data/raw/               # Raw data files")
-    print("├── data/processed/         # Processed data files")
-    print("├── notebooks/              # Jupyter notebooks")
-    print("└── reports/                # Analysis reports")
-    
-    print("\nQuick Start (REFINED PIPELINE):")
-    print("1. python launcher.py full           # Complete pipeline")
-    print("   OR run individual steps:")
-    print("2. python launcher.py collect        # Data collection (no Yelp)")
-    print("3. python launcher.py process        # Feature engineering")  
-    print("4. python launcher.py train          # Model training (3 models)")
-    print("5. python launcher.py validate       # Validation check")
-    print("6. python launcher.py notebook       # Interactive analysis")
-    
-    print("\nPipeline Improvements:")
-    print("- ✅ Removed Yelp API dependency")
-    print("- ✅ Streamlined to 3 relevant models")  
-    print("- ✅ Fixed overfitting issues")
-    print("- ✅ Enhanced heatmap visualization")
-    print("- ✅ Better performance (R2=0.355)")
-    
-    print("\nProcessing Options:")
-    print("- process      : Standard pandas processing (recommended)")
-    print("- spark        : PySpark processing (for large datasets)")
-    
-    print("\nDocumentation:")
-    print("- README.md: Complete project overview")
-    print("- REFINEMENT_SUMMARY.md: Latest improvements") 
-    print("- MODEL_IMPROVEMENTS_SUMMARY.md: Model details")
+
 
 def main():
     """Main launcher function"""

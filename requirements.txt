@@ -1,19 +1,18 @@
 # Core Data Science Libraries
 pandas>=1.5.0
 numpy>=1.21.0
-scipy>=1.7.0
 
 # Machine Learning
 scikit-learn>=1.1.0
 xgboost>=1.6.0
 
-# Big Data Processing
-pyspark>=3.4.0
-
-# Sentiment Analysis and NLP
-transformers>=4.21.0
-torch>=1.12.0
-sentencepiece>=0.1.97
+# Sentiment Analysis and NLP (compatible versions)
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+transformers==4.35.0
+tokenizers>=0.14,<0.15
+safetensors
 
 # Geospatial Analysis
 geopandas>=0.11.0
@@ -23,26 +22,6 @@ geopy>=2.2.0
 # Data Visualization
 matplotlib>=3.5.0
 seaborn>=0.11.0
-plotly>=5.10.0
 
-# Web APIs and Data Collection
-requests>=2.28.0
-urllib3>=1.26.0
-
-# Environment Management
-python-dotenv>=0.19.0
-
-# Jupyter Notebook
-jupyter>=1.0.0
-ipykernel>=6.15.0
-notebook>=6.4.0
-
-# Additional Utilities
-tqdm>=4.64.0  # Progress bars
-openpyxl>=3.0.0  # Excel support
-xlrd>=2.0.0  # Excel reading
-
-# Optional: Advanced ML Libraries
-# lightgbm>=3.3.0
-# catboost>=1.0.0
-# shap>=0.41.0  # Model explainability
+# Model persistence (used by scikit-learn)
+joblib

@@ -19,11 +19,14 @@ import logging
 import json
 
 # Set up logging
+project_root = Path(__file__).parent.parent
+log_file = project_root / 'data' / 'data_collection.log'
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('../data/data_collection.log'),
+        logging.FileHandler(log_file),
         logging.StreamHandler()
     ]
 )
@@ -33,12 +36,14 @@ class DataCollector:
     """Main class for organizing and validating existing data files"""
     
     def __init__(self):
-        self.raw_data_dir = '../data/raw'
-        self.processed_data_dir = '../data/processed'
+        # Get the project root directory (parent of src)
+        self.project_root = Path(__file__).parent.parent
+        self.raw_data_dir = self.project_root / 'data' / 'raw'
+        self.processed_data_dir = self.project_root / 'data' / 'processed'
         
         # Ensure data directories exist
-        os.makedirs(self.raw_data_dir, exist_ok=True)
-        os.makedirs(self.processed_data_dir, exist_ok=True)
+        self.raw_data_dir.mkdir(parents=True, exist_ok=True)
+        self.processed_data_dir.mkdir(parents=True, exist_ok=True)
         
         # Expected raw data files
         self.expected_files = {
@@ -57,9 +62,9 @@ class DataCollector:
         validation_results = {}
         
         for data_type, filename in self.expected_files.items():
-            file_path = os.path.join(self.raw_data_dir, filename)
+            file_path = self.raw_data_dir / filename
             
-            if os.path.exists(file_path):
+            if file_path.exists():
                 try:
                     if filename.endswith('.geojson'):
                         # Validate GeoJSON file
@@ -69,7 +74,7 @@ class DataCollector:
                             'readable': True,
                             'rows': len(gdf),
                             'columns': list(gdf.columns),
-                            'file_size_mb': os.path.getsize(file_path) / (1024*1024)
+                            'file_size_mb': file_path.stat().st_size / (1024*1024)
                         }
                         logger.info(f"[OK] {data_type}: {len(gdf)} records loaded from {filename}")
                         
@@ -91,7 +96,7 @@ class DataCollector:
                                 'readable': True,
                                 'rows': len(df),
                                 'columns': list(df.columns),
-                                'file_size_mb': os.path.getsize(file_path) / (1024*1024),
+                                'file_size_mb': file_path.stat().st_size / (1024*1024),
                                 'encoding_used': encoding
                             }
                             logger.info(f"[OK] {data_type}: {len(df)} records loaded from {filename} (encoding: {encoding})")
@@ -128,7 +133,7 @@ class DataCollector:
         """
         logger.info("Loading business license data...")
         
-        file_path = os.path.join(self.raw_data_dir, self.expected_files['business_licenses'])
+        file_path = self.raw_data_dir / self.expected_files['business_licenses']
         
         try:
             gdf = gpd.read_file(file_path)
@@ -151,7 +156,7 @@ class DataCollector:
             food_establishments = gdf[food_mask].copy()
             
             # Save filtered data
-            output_path = os.path.join(self.processed_data_dir, 'business_licenses_food.geojson')
+            output_path = self.processed_data_dir / 'business_licenses_food.geojson'
             food_establishments.to_file(output_path, driver='GeoJSON')
             
             logger.info(f"Filtered {len(food_establishments)} food establishments from {len(gdf)} total licenses")
@@ -167,7 +172,7 @@ class DataCollector:
         """
         logger.info("Loading census data...")
         
-        file_path = os.path.join(self.raw_data_dir, self.expected_files['census_data'])
+        file_path = self.raw_data_dir / self.expected_files['census_data']
         
         try:
             # The census file has a specific format, let's examine its structure
@@ -185,7 +190,7 @@ class DataCollector:
             
             if df is not None:
                 # Save basic info about the census data
-                output_path = os.path.join(self.processed_data_dir, 'census_data_raw.csv')
+                output_path = self.processed_data_dir / 'census_data_raw.csv'
                 df.to_csv(output_path, index=False, encoding='utf-8')
                 
                 logger.info(f"Loaded census data with {len(df)} rows and {len(df.columns)} columns")
@@ -204,8 +209,8 @@ class DataCollector:
         """
         logger.info("Loading restaurant data...")
         
-        overview_path = os.path.join(self.raw_data_dir, self.expected_files['restaurant_overview'])
-        reviews_path = os.path.join(self.raw_data_dir, self.expected_files['restaurant_reviews'])
+        overview_path = self.raw_data_dir / self.expected_files['restaurant_overview']
+        reviews_path = self.raw_data_dir / self.expected_files['restaurant_reviews']
         
         overview_df = pd.DataFrame()
         reviews_df = pd.DataFrame()
@@ -213,7 +218,7 @@ class DataCollector:
         try:
             # Load restaurant overview data
             overview_df = pd.read_csv(overview_path)
-            overview_output = os.path.join(self.processed_data_dir, 'google_restaurants_overview.csv')
+            overview_output = self.processed_data_dir / 'google_restaurants_overview.csv'
             overview_df.to_csv(overview_output, index=False)
             logger.info(f"Loaded restaurant overview data: {len(overview_df)} restaurants")
             
@@ -223,7 +228,7 @@ class DataCollector:
         try:
             # Load restaurant reviews data
             reviews_df = pd.read_csv(reviews_path)
-            reviews_output = os.path.join(self.processed_data_dir, 'google_restaurants_reviews.csv')
+            reviews_output = self.processed_data_dir / 'google_restaurants_reviews.csv'
             reviews_df.to_csv(reviews_output, index=False)
             logger.info(f"Loaded restaurant reviews data: {len(reviews_df)} restaurants")
             
@@ -255,7 +260,7 @@ class DataCollector:
         }
         
         # Save summary
-        summary_path = os.path.join(self.processed_data_dir, 'data_collection_summary.json')
+        summary_path = self.processed_data_dir / 'data_collection_summary.json'
         with open(summary_path, 'w') as f:
             json.dump(summary, f, indent=2)
         
@@ -279,7 +284,7 @@ class DataCollector:
         summary = self.generate_data_summary(validation_results)
         
         logger.info("Data organization completed!")
-        logger.info(f"Summary saved to: {os.path.join(self.processed_data_dir, 'data_collection_summary.json')}")
+        logger.info(f"Summary saved to: {self.processed_data_dir / 'data_collection_summary.json'}")
         
         return {
             'validation_results': validation_results,
@@ -313,8 +318,8 @@ def main():
             if result.get('encoding_used'):
                 print(f"   - Encoding: {result.get('encoding_used')}")
     
-    print("\nProcessed files saved to: ../data/processed/")
-    print("Summary file: ../data/processed/data_collection_summary.json")
+    print("\nProcessed files saved to: data/processed/")
+    print("Summary file: data/processed/data_collection_summary.json")
 
 
 if __name__ == "__main__":

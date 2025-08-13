@@ -75,8 +75,8 @@ class MultilinguaSentimentAnalyzer:
         analyzer = MultilinguaSentimentAnalyzer()
         results = analyzer.predict_sentiment(["Great food", "Terrible service"])  # list of dicts
     """
-    def __init__(self, multilingual_model: str = "cardiffnlp/twitter-xlm-roberta-base-sentiment",
-                 fallback_model: str = "cardiffnlp/twitter-roberta-base-sentiment-latest",
+    def __init__(self, multilingual_model: str = "tabularisai/multilingual-sentiment-analysis",
+                 fallback_model: str = "distilbert-base-uncased-finetuned-sst-2-english",
                  batch_size: int = 16):
         self.multilingual_model = multilingual_model
         self.fallback_model = fallback_model

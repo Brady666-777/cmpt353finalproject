@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-This report presents a machine learning framework for predicting restaurant success in Vancouver, BC. By analyzing 3,222 restaurants and engineering meaningful features, we developed a predictive model achieving R² = 0.355 using Ridge Regression. Geographic location emerged as the dominant success factor, with competition density and market saturation as secondary predictors.
+This report presents a machine learning framework for predicting restaurant success in Vancouver, BC. By analyzing 3,222 restaurants and engineering meaningful features, we developed a predictive model achieving R² = 0.354 using Ridge Regression. Geographic location emerged as the dominant success factor, with competition density and market saturation as secondary predictors.
 
 **Key Findings**:
 
@@ -31,26 +31,38 @@ Restaurant failure rates exceed 60% within the first year, with location cited a
 
 ### 2.1 Primary Datasets
 
-**Vancouver Business Licenses** (City of Vancouver Open Data):
+**Vancouver Business Licenses** (City of Vancouver Open Data Portal):
 
-- 4,064 food-related business records
-- Filtered to 3,222 active, geocoded restaurants (79% success rate)
-- Geographic coverage: Vancouver boundaries (49.204°-49.298°N, 123.024°-123.212°W)
+- 4,064 food-related business licenses from static GeoJSON file
+- Filtered to 3,222 active restaurants with valid coordinates
+- Geographic distribution across Vancouver neighborhoods
+- Business types, issue dates, and operational status
+- File: `business-licences.geojson`
 
-**Google Restaurant Data**:
+**Google Restaurant Data** (Static CSV Files):
 
-- Overview: 106 detailed restaurant profiles
-- Reviews: 500 restaurants with performance metrics
-- Key variables: ratings, review counts, pricing, operational status
+- 106 restaurant profiles with ratings and reviews
+- 500 customer reviews for sentiment analysis
+- Rating distributions and customer feedback patterns
+- Files: `good-restaurant-in-vancouver-overview.csv`, `google-review_2025-08-06_03-55-37-484.csv`
 
-**Census Demographics** (Statistics Canada 2021):
+**Statistics Canada Census 2021** (Static CSV File):
 
-- 3,389 demographic records at census tract level
-- Population density, income distribution, age demographics
+- 3,389 census profile records with demographic data
+- Population density and income distribution by area
+- Used for neighborhood profiling and market analysis
+- File: `CensusProfile2021-ProfilRecensement2021-20250811051126.csv`
 
 ### 2.2 Data Collection Approach
 
-**No External APIs**: We eliminated dependencies on external APIs, ensuring reproducible results using existing local datasets. This decision focused the project on data science techniques rather than API management while working within realistic academic constraints.
+**Static File Processing**: All data sources are pre-downloaded static files requiring no API calls or external dependencies. This approach ensures:
+
+- Complete reproducibility across different environments
+- No rate limiting or API key management issues
+- Focus on data science methodology rather than data collection
+- Realistic constraints for academic project timeline
+
+**Data Integration Strategy**: Files are processed using pandas and geopandas, with robust error handling for encoding issues and missing values.
 
 ## 3. Methodology
 
@@ -97,38 +109,68 @@ Restaurant failure rates exceed 60% within the first year, with location cited a
 
 **Best Model**: Ridge Regression (Tuned)
 
-- **Test R² Score**: 0.355 (Fair performance)
-- **RMSE**: 0.047, **Cross-Validation R²**: 0.284 ± 0.046
-- **Overfitting**: Minimal (-0.063)
+- **Test R² Score**: 0.354 (Fair performance)
+- **RMSE**: 0.047, **Cross-Validation R²**: 0.285 ± 0.000
+- **Overfitting**: Minimal (stable across train/test sets)
+- **Best Parameters**: alpha = 10.0
 
 **Model Comparison**:
 | Model | R² Score | RMSE | CV R² | Overfitting |
 |-------|----------|------|-------|-------------|
-| Ridge (Tuned) | 0.355 | 0.047 | 0.284 | -0.063 |
-| XGBoost | 0.354 | 0.047 | 0.265 | -0.042 |
-| Random Forest | 0.352 | 0.047 | 0.248 | +0.025 |
+| Ridge (Tuned) | 0.354 | 0.047 | 0.285 | Stable |
+| Ridge | 0.353 | 0.047 | 0.283 | -0.060 |
+| XGBoost | 0.350 | 0.047 | 0.261 | -0.028 |
+| Random Forest | 0.345 | 0.047 | 0.248 | +0.073 |
+
+![Model Performance Comparison](plots/enhanced_model_comparison.png)
+_Figure 1: Comprehensive comparison of model performance metrics_
+
+![Prediction vs Actual](plots/prediction_vs_actual.png)
+_Figure 2: Model predictions compared to actual success scores_
+
+![Residual Analysis](plots/residual_plot.png)
+_Figure 3: Residual analysis showing model prediction errors_
 
 ### 4.2 Feature Importance
 
-**Top 5 Predictors**:
+**Top 5 Predictors by Coefficient Magnitude**:
 
 1. **Distance from Downtown** (-0.043): Central proximity reduces success
 2. **Competitor Count** (-0.013): Higher competition decreases probability
-3. **Similar Cuisine Count** (-0.010): Cuisine-specific competition effect
-4. **Market Saturation** (-0.006): Overall density impact
-5. **Latitude** (+0.002): North-south geographic preferences
+3. **Similar Cuisine Count** (-0.011): Cuisine-specific competition effect
+4. **Market Saturation** (-0.005): Overall density impact
+5. **Latitude** (+0.001): North-south geographic preferences
 
-_[Insert feature importance plot here]_
+**Geographic Dominance**: Location features (longitude, latitude) account for 54.6% of total feature importance, confirming location as the primary success driver.
+
+![Feature Importance](plots/feature_importance.png)
+_Figure 4: Feature importance ranking showing geographic factors dominance_
+
+![Best Model Coefficients](plots/best_model_coefficients.png)
+_Figure 5: Ridge Regression coefficients showing feature impact direction_
+
+![Feature Correlations](plots/feature_correlations.png)
+_Figure 6: Correlation matrix revealing relationships between features_
 
 ### 4.3 Clustering Analysis
 
-**10 Optimal Clusters Identified**:
+**4 Optimal Clusters Identified** (Silhouette Score: 0.356):
 
-- **Largest**: 873 restaurants (27.1%) in high-competition downtown areas
-- **Smallest**: 10 restaurants (0.3%) in low-sentiment suburban areas
-- **Geographic Patterns**: Clear neighborhood-based clustering with moderate performance across all clusters
+- **Cluster 0**: 792 restaurants (24.6%) - Low competition areas
+- **Cluster 1**: 917 restaurants (28.5%) - Balanced competition zones
+- **Cluster 2**: 861 restaurants (26.7%) - High competition districts
+- **Cluster 3**: 652 restaurants (20.2%) - High sentiment confidence areas
 
-_[Insert cluster visualization plot here]_
+**Key Finding**: All clusters show similar success scores (0.600), indicating consistent performance across different geographic and competitive environments.
+
+![Clustering Optimization](plots/clustering_optimization.png)
+_Figure 7: K-means clustering optimization showing optimal cluster selection_
+
+![Cluster Visualization](plots/cluster_visualization.png)
+_Figure 8: Geographic visualization of restaurant clusters across Vancouver_
+
+![Cluster PCA Visualization](plots/cluster_pca_visualization.png)
+_Figure 9: Principal component analysis of cluster characteristics_
 
 ### 4.4 Geographic Success Patterns
 
@@ -138,7 +180,39 @@ _[Insert cluster visualization plot here]_
 
 **Cuisine Recommendations**: 75 location suggestions across 25 cuisine types, including 3 Italian locations in Kitsilano/West End and 4 Asian fusion spots on Commercial Drive.
 
-_[Insert geographic heatmap here]_
+![Geographic Distribution](plots/geographic_distribution.png)
+_Figure 10: Geographic distribution of restaurants across Vancouver neighborhoods_
+
+![Prediction Heatmap](plots/prediction_heatmap.png)
+_Figure 11: Success probability heatmap showing optimal locations for new restaurants_
+
+![Success Score Distribution](plots/success_score_distribution.png)
+_Figure 12: Distribution of success scores across the restaurant dataset_
+
+### 4.5 Visualization Summary
+
+**Model Performance Visualizations**:
+
+- Figure 1: Enhanced model comparison showing R², RMSE, and cross-validation metrics
+- Figure 2: Prediction vs actual scatter plot demonstrating model accuracy
+- Figure 3: Residual analysis for identifying prediction patterns and outliers
+
+**Feature Analysis Visualizations**:
+
+- Figure 4: Feature importance ranking highlighting geographic dominance
+- Figure 5: Ridge regression coefficients showing positive/negative impacts
+- Figure 6: Feature correlation heatmap revealing multicollinearity patterns
+
+**Clustering and Geographic Visualizations**:
+
+- Figure 7: Clustering optimization using elbow method and silhouette scores
+- Figure 8: Geographic cluster visualization mapping restaurant archetypes
+- Figure 9: PCA analysis reducing dimensionality for cluster interpretation
+- Figure 10: Restaurant distribution across Vancouver neighborhoods
+- Figure 11: Success probability heatmap for location optimization
+- Figure 12: Success score distribution showing target variable characteristics
+
+**All visualizations are saved in `/reports/plots/` directory for detailed examination.**
 
 ## 5. Business Impact and Applications
 
@@ -169,15 +243,15 @@ _[Insert geographic heatmap here]_
 
 **Model Limitations**:
 
-- Fair predictive power (R²=0.355) indicates significant unexplained variance
+- Fair predictive power (R²=0.354) indicates significant unexplained variance
 - Linear assumptions may miss complex non-linear relationships
 - Vancouver-specific model may not generalize to other cities
 
-### 6.2 Technical Challenges Encountered
+### 6.2 Technical Challenges and Solutions
 
-- **Sentiment Analysis**: Transformer models failed, required keyword-based fallback
-- **API Dependencies**: Originally planned external APIs proved unreliable
-- **Computational Complexity**: Required simplified grid approach for competitive analysis
+- **Sentiment Analysis**: Successfully resolved transformer compatibility issues by updating PyTorch components to compatible versions (torch==2.1.0, transformers==4.35.0). Now using tabularisai multilingual sentiment model.
+- **Static Data Approach**: Eliminated API dependencies by using pre-downloaded static datasets, ensuring reproducibility
+- **Computational Efficiency**: Implemented grid-based competitive analysis to handle large dataset processing
 
 ### 6.3 Future Improvements
 
@@ -202,7 +276,7 @@ This analysis demonstrates that while restaurant success prediction remains chal
 - **Practical Tool**: 75 specific location recommendations with quantitative justification
 - **Open Source**: Complete codebase available for replication and extension
 
-The fair predictive performance (R²=0.355) achieved suggests location factors, while important, represent only part of the restaurant success equation, highlighting continued importance of operational excellence, customer service, and market timing.
+The fair predictive performance (R²=0.354) achieved suggests location factors, while important, represent only part of the restaurant success equation, highlighting continued importance of operational excellence, customer service, and market timing.
 
 **Business Value**: This framework transforms subjective site selection into data-driven decision making, providing restaurant entrepreneurs, urban planners, and investors with quantitative tools for location assessment and risk mitigation.
 
@@ -212,6 +286,7 @@ _[Insert final prediction heatmap here]_
 
 **Technical Implementation**: Complete pipeline available with modular design, error handling, and reproducible results. All analysis conducted using Python with pandas, geopandas, scikit-learn, and xgboost.
 
+<!--
 - Matched restaurants to neighborhoods using point-in-polygon operations
 - Calculated distances using geodesic algorithms
 - Aggregated demographic data to neighborhood level
@@ -479,3 +554,4 @@ Tested multiple algorithms to capture different relationship types:
 ---
 
 _This report represents a comprehensive analysis of restaurant success prediction in Vancouver, BC. The methodology and findings provide a foundation for data-driven business location decisions and urban planning initiatives._
+-->
