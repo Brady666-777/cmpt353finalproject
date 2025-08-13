@@ -6,20 +6,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.14090595580284,
-          49.25748532903562
+          -123.09173964328504,
+          49.27016060203062
         ]
       },
       "properties": {
         "cuisine_type": "Italian restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6582665305772575,
-        "competitor_count": 19,
-        "similar_cuisine_count": 19,
-        "local_area": "Kitsilano",
-        "neighborhood": "Kitsilano",
+        "predicted_success_score": 0.7107384928167217,
+        "competitor_count": 14,
+        "similar_cuisine_count": 14,
+        "local_area": "Mount Pleasant",
+        "neighborhood": "Mount Pleasant",
         "recommendation_reason": "Established Italian restaurant scene - proven market with moderate competition",
-        "confidence": 0.6333333333333333
+        "confidence": 0.4666666666666667
       }
     },
     {
@@ -27,102 +27,60 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.07832553699502,
-          49.25311439657224
+          -123.1455255704363,
+          49.27792477710437
         ]
       },
       "properties": {
         "cuisine_type": "Italian restaurant",
         "rank": 2,
-        "predicted_success_score": 0.6297225455539477,
-        "competitor_count": 23,
-        "similar_cuisine_count": 23,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Established Italian restaurant scene - proven market with moderate competition",
-        "confidence": 0.7666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.16369361788914,
-          49.26648421088963
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Italian restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.6355241289845845,
-        "competitor_count": 23,
-        "similar_cuisine_count": 23,
-        "local_area": "Kitsilano",
-        "neighborhood": "Kitsilano",
-        "recommendation_reason": "Established Italian restaurant scene - proven market with moderate competition",
-        "confidence": 0.7666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.07134550890741,
-          49.25628872783417
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Indian restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.6858383857593252,
-        "competitor_count": 6,
-        "similar_cuisine_count": 6,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Growing market for Indian restaurant - good opportunity with manageable competition",
-        "confidence": 0.2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.11177717485214,
-          49.24474291990369
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Indian restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.6031650400629693,
-        "competitor_count": 3,
-        "similar_cuisine_count": 3,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Growing market for Indian restaurant - good opportunity with manageable competition",
-        "confidence": 0.1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.09576215247462,
-          49.25661000224022
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Indian restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.655466202486534,
+        "predicted_success_score": 0.6287220343635804,
         "competitor_count": 0,
         "similar_cuisine_count": 0,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
+        "local_area": "Kitsilano",
+        "neighborhood": "Kitsilano",
+        "recommendation_reason": "Emerging area for Italian restaurant - first-mover advantage but unproven market",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0608370136493,
+          49.25794843215182
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Italian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5932856902816134,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Emerging area for Italian restaurant - first-mover advantage but unproven market",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.06039507729498,
+          49.27444149509943
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Indian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.63707386922236,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
         "recommendation_reason": "Emerging area for Indian restaurant - first-mover advantage but unproven market",
         "confidence": 0.0
       }
@@ -132,20 +90,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.13063410052109,
-          49.269493297218936
+          -123.11181224274502,
+          49.25730342300003
         ]
       },
       "properties": {
-        "cuisine_type": "French restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.6661269647391136,
-        "competitor_count": 6,
-        "similar_cuisine_count": 6,
-        "local_area": "Yaletown",
-        "neighborhood": "Yaletown",
-        "recommendation_reason": "Growing market for French restaurant - good opportunity with manageable competition",
-        "confidence": 0.2
+        "cuisine_type": "Indian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.6298682443706448,
+        "competitor_count": 34,
+        "similar_cuisine_count": 34,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Competitive Indian restaurant market - high foot traffic but need strong differentiation",
+        "confidence": 1.0
       }
     },
     {
@@ -153,20 +111,62 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.14010425343969,
-          49.23357797320101
+          -123.09732352655757,
+          49.24721519874342
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Indian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.6192700638889943,
+        "competitor_count": 48,
+        "similar_cuisine_count": 48,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Competitive Indian restaurant market - high foot traffic but need strong differentiation",
+        "confidence": 1.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13219968580688,
+          49.26613133600777
+        ]
+      },
+      "properties": {
+        "cuisine_type": "French restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.6209787377857955,
+        "competitor_count": 21,
+        "similar_cuisine_count": 21,
+        "local_area": "Yaletown",
+        "neighborhood": "Yaletown",
+        "recommendation_reason": "Established French restaurant scene - proven market with moderate competition",
+        "confidence": 0.7
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.11164531452495,
+          49.289151312043344
         ]
       },
       "properties": {
         "cuisine_type": "French restaurant",
         "rank": 2,
-        "predicted_success_score": 0.6586731242374539,
-        "competitor_count": 7,
-        "similar_cuisine_count": 7,
-        "local_area": "South Granville",
-        "neighborhood": "South Granville",
-        "recommendation_reason": "Growing market for French restaurant - good opportunity with manageable competition",
-        "confidence": 0.23333333333333334
+        "predicted_success_score": 0.5188325034217592,
+        "competitor_count": 55,
+        "similar_cuisine_count": 55,
+        "local_area": "Gastown",
+        "neighborhood": "Gastown",
+        "recommendation_reason": "Saturated French restaurant market - very competitive, requires unique positioning",
+        "confidence": 1.0
       }
     },
     {
@@ -174,20 +174,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.10354975795465,
-          49.29394617911262
+          -123.12902736605226,
+          49.239474313198606
         ]
       },
       "properties": {
         "cuisine_type": "French restaurant",
         "rank": 3,
-        "predicted_success_score": 0.5810809549046335,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
-        "local_area": "Gastown",
-        "neighborhood": "Gastown",
+        "predicted_success_score": 0.5230641209746798,
+        "competitor_count": 1,
+        "similar_cuisine_count": 1,
+        "local_area": "South Granville",
+        "neighborhood": "South Granville",
         "recommendation_reason": "Emerging area for French restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
+        "confidence": 0.03333333333333333
       }
     },
     {
@@ -195,20 +195,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11076981866375,
-          49.28927123115615
+          -123.11720719423998,
+          49.27271556479602
         ]
       },
       "properties": {
         "cuisine_type": "Seafood restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6093354441417086,
-        "competitor_count": 29,
-        "similar_cuisine_count": 29,
+        "predicted_success_score": 0.5935886150509783,
+        "competitor_count": 32,
+        "similar_cuisine_count": 32,
         "local_area": "Downtown",
         "neighborhood": "Downtown",
         "recommendation_reason": "Competitive Seafood restaurant market - high foot traffic but need strong differentiation",
-        "confidence": 0.9666666666666667
+        "confidence": 1.0
       }
     },
     {
@@ -216,37 +216,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.09436893152466,
-          49.2420560151267
+          -123.06579176097111,
+          49.26673227562626
         ]
       },
       "properties": {
         "cuisine_type": "Seafood restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5604414637975853,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Emerging area for Seafood restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.06542911278669,
-          49.27106248394959
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Seafood restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5486309835396842,
-        "competitor_count": 30,
-        "similar_cuisine_count": 30,
+        "predicted_success_score": 0.5516140074845116,
+        "competitor_count": 34,
+        "similar_cuisine_count": 34,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
         "recommendation_reason": "Competitive Seafood restaurant market - high foot traffic but need strong differentiation",
@@ -258,61 +237,19 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.10914003757274,
-          49.26007504379851
+          -123.10042419920687,
+          49.24723832971583
         ]
       },
       "properties": {
-        "cuisine_type": "Chinese restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.7814865487327434,
-        "competitor_count": 12,
-        "similar_cuisine_count": 12,
+        "cuisine_type": "Seafood restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.4981570897204123,
+        "competitor_count": 67,
+        "similar_cuisine_count": 67,
         "local_area": "Main Street",
         "neighborhood": "Main Street",
-        "recommendation_reason": "Established Chinese restaurant scene - proven market with moderate competition",
-        "confidence": 0.4
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.09291379064929,
-          49.270893923011606
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Chinese restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.7798849578383659,
-        "competitor_count": 12,
-        "similar_cuisine_count": 12,
-        "local_area": "Chinatown",
-        "neighborhood": "Chinatown",
-        "recommendation_reason": "Established Chinese restaurant scene - proven market with moderate competition",
-        "confidence": 0.4
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.10735623996668,
-          49.27958195285287
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Chinese restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.6466661955785006,
-        "competitor_count": 93,
-        "similar_cuisine_count": 93,
-        "local_area": "Chinatown",
-        "neighborhood": "Chinatown",
-        "recommendation_reason": "Saturated Chinese restaurant market - very competitive, requires unique positioning",
+        "recommendation_reason": "Saturated Seafood restaurant market - very competitive, requires unique positioning",
         "confidence": 1.0
       }
     },
@@ -321,20 +258,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.15085439852862,
-          49.26307669949123
+          -123.1147827324943,
+          49.27262810694342
         ]
       },
       "properties": {
-        "cuisine_type": "Japanese restaurant",
+        "cuisine_type": "Chinese restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6833318259570641,
-        "competitor_count": 24,
-        "similar_cuisine_count": 24,
-        "local_area": "Kitsilano",
-        "neighborhood": "Kitsilano",
-        "recommendation_reason": "Established Japanese restaurant scene - proven market with moderate competition",
-        "confidence": 0.8
+        "predicted_success_score": 0.7572537253799522,
+        "competitor_count": 17,
+        "similar_cuisine_count": 17,
+        "local_area": "Chinatown",
+        "neighborhood": "Chinatown",
+        "recommendation_reason": "Established Chinese restaurant scene - proven market with moderate competition",
+        "confidence": 0.5666666666666667
       }
     },
     {
@@ -342,20 +279,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.10699586856317,
-          49.27743122488434
+          -123.10302469469315,
+          49.23982096239638
         ]
       },
       "properties": {
-        "cuisine_type": "Japanese restaurant",
+        "cuisine_type": "Chinese restaurant",
         "rank": 2,
-        "predicted_success_score": 0.6579501171833017,
-        "competitor_count": 43,
-        "similar_cuisine_count": 43,
-        "local_area": "Robson Street",
-        "neighborhood": "Robson Street",
-        "recommendation_reason": "Competitive Japanese restaurant market - high foot traffic but need strong differentiation",
-        "confidence": 1.0
+        "predicted_success_score": 0.7370494313985801,
+        "competitor_count": 8,
+        "similar_cuisine_count": 8,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Growing market for Chinese restaurant - good opportunity with manageable competition",
+        "confidence": 0.26666666666666666
       }
     },
     {
@@ -363,19 +300,19 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.13776241108988,
-          49.29922211842216
+          -123.09017747743222,
+          49.28782792115994
         ]
       },
       "properties": {
-        "cuisine_type": "Japanese restaurant",
+        "cuisine_type": "Chinese restaurant",
         "rank": 3,
-        "predicted_success_score": 0.6436922488790041,
+        "predicted_success_score": 0.6983428177858615,
         "competitor_count": 0,
         "similar_cuisine_count": 0,
-        "local_area": "West End",
-        "neighborhood": "West End",
-        "recommendation_reason": "Emerging area for Japanese restaurant - first-mover advantage but unproven market",
+        "local_area": "Chinatown",
+        "neighborhood": "Chinatown",
+        "recommendation_reason": "Emerging area for Chinese restaurant - first-mover advantage but unproven market",
         "confidence": 0.0
       }
     },
@@ -384,20 +321,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.1655318246162,
-          49.25714955951466
+          -123.16541327260627,
+          49.26171422634006
         ]
       },
       "properties": {
-        "cuisine_type": "Mexican restaurant",
+        "cuisine_type": "Japanese restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6555760158886526,
-        "competitor_count": 6,
-        "similar_cuisine_count": 6,
+        "predicted_success_score": 0.6779058369350072,
+        "competitor_count": 17,
+        "similar_cuisine_count": 17,
         "local_area": "Kitsilano",
         "neighborhood": "Kitsilano",
-        "recommendation_reason": "Growing market for Mexican restaurant - good opportunity with manageable competition",
-        "confidence": 0.2
+        "recommendation_reason": "Established Japanese restaurant scene - proven market with moderate competition",
+        "confidence": 0.5666666666666667
       }
     },
     {
@@ -405,20 +342,62 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.09322138054696,
-          49.270306968808505
+          -123.1081505883988,
+          49.28622907355575
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Japanese restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.6044086536966778,
+        "competitor_count": 78,
+        "similar_cuisine_count": 78,
+        "local_area": "Robson Street",
+        "neighborhood": "Robson Street",
+        "recommendation_reason": "Saturated Japanese restaurant market - very competitive, requires unique positioning",
+        "confidence": 1.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13835073843367,
+          49.28630105606048
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Japanese restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.6105705989581621,
+        "competitor_count": 77,
+        "similar_cuisine_count": 77,
+        "local_area": "West End",
+        "neighborhood": "West End",
+        "recommendation_reason": "Saturated Japanese restaurant market - very competitive, requires unique positioning",
+        "confidence": 1.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.09428564744667,
+          49.26868533511369
         ]
       },
       "properties": {
         "cuisine_type": "Mexican restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.6393949026310044,
-        "competitor_count": 16,
-        "similar_cuisine_count": 16,
+        "rank": 1,
+        "predicted_success_score": 0.6709058629002878,
+        "competitor_count": 14,
+        "similar_cuisine_count": 14,
         "local_area": "Mount Pleasant",
         "neighborhood": "Mount Pleasant",
         "recommendation_reason": "Established Mexican restaurant scene - proven market with moderate competition",
-        "confidence": 0.5333333333333333
+        "confidence": 0.4666666666666667
       }
     },
     {
@@ -426,20 +405,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.05729665993874,
-          49.2615695715181
+          -123.14955712037987,
+          49.27362192979174
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Mexican restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.6440313607650303,
+        "competitor_count": 28,
+        "similar_cuisine_count": 28,
+        "local_area": "Kitsilano",
+        "neighborhood": "Kitsilano",
+        "recommendation_reason": "Competitive Mexican restaurant market - high foot traffic but need strong differentiation",
+        "confidence": 0.9333333333333333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.06149562916103,
+          49.25382988760866
         ]
       },
       "properties": {
         "cuisine_type": "Mexican restaurant",
         "rank": 3,
-        "predicted_success_score": 0.6248947456004655,
-        "competitor_count": 15,
-        "similar_cuisine_count": 15,
+        "predicted_success_score": 0.5893684049451619,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Established Mexican restaurant scene - proven market with moderate competition",
-        "confidence": 0.5
+        "recommendation_reason": "Emerging area for Mexican restaurant - first-mover advantage but unproven market",
+        "confidence": 0.0
       }
     },
     {
@@ -447,20 +447,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.09643987850635,
-          49.25618264847051
+          -123.12811827035483,
+          49.25371137043537
         ]
       },
       "properties": {
         "cuisine_type": "Thai restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6956165046191131,
-        "competitor_count": 6,
-        "similar_cuisine_count": 6,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Growing market for Thai restaurant - good opportunity with manageable competition",
-        "confidence": 0.2
+        "predicted_success_score": 0.7075453427256586,
+        "competitor_count": 10,
+        "similar_cuisine_count": 10,
+        "local_area": "Fairview",
+        "neighborhood": "Fairview",
+        "recommendation_reason": "Established Thai restaurant scene - proven market with moderate competition",
+        "confidence": 0.3333333333333333
       }
     },
     {
@@ -468,35 +468,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.1387719093748,
-          49.24773963813347
+          -123.05865849569943,
+          49.25304445545956
         ]
       },
       "properties": {
         "cuisine_type": "Thai restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5634151575303542,
-        "competitor_count": 4,
-        "similar_cuisine_count": 4,
-        "local_area": "Fairview",
-        "neighborhood": "Fairview",
-        "recommendation_reason": "Growing market for Thai restaurant - good opportunity with manageable competition",
-        "confidence": 0.13333333333333333
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.0739838390717,
-          49.25652841095946
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Thai restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5906190449762042,
+        "predicted_success_score": 0.6101866978766792,
         "competitor_count": 0,
         "similar_cuisine_count": 0,
         "local_area": "Commercial Drive",
@@ -510,19 +489,19 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11167796952088,
-          49.29592086734268
+          -123.06007218210328,
+          49.27520501816809
         ]
       },
       "properties": {
-        "cuisine_type": "Korean restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.630227273086127,
+        "cuisine_type": "Thai restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5894665940323647,
         "competitor_count": 0,
         "similar_cuisine_count": 0,
-        "local_area": "Robson Street",
-        "neighborhood": "Robson Street",
-        "recommendation_reason": "Emerging area for Korean restaurant - first-mover advantage but unproven market",
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Emerging area for Thai restaurant - first-mover advantage but unproven market",
         "confidence": 0.0
       }
     },
@@ -531,16 +510,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.13792809583737,
-          49.28672011146971
+          -123.11351427331682,
+          49.27368451779331
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Korean restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.6791831401237374,
+        "competitor_count": 23,
+        "similar_cuisine_count": 23,
+        "local_area": "Robson Street",
+        "neighborhood": "Robson Street",
+        "recommendation_reason": "Established Korean restaurant scene - proven market with moderate competition",
+        "confidence": 0.7666666666666667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1421079928888,
+          49.28505483019951
         ]
       },
       "properties": {
         "cuisine_type": "Korean restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5676342669772406,
-        "competitor_count": 80,
-        "similar_cuisine_count": 80,
+        "predicted_success_score": 0.53197204153462,
+        "competitor_count": 57,
+        "similar_cuisine_count": 57,
         "local_area": "West End",
         "neighborhood": "West End",
         "recommendation_reason": "Saturated Korean restaurant market - very competitive, requires unique positioning",
@@ -552,20 +552,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11771530808174,
-          49.27576790540844
+          -123.1280133382474,
+          49.29505223583232
         ]
       },
       "properties": {
         "cuisine_type": "Korean restaurant",
         "rank": 3,
-        "predicted_success_score": 0.5661976271570376,
-        "competitor_count": 123,
-        "similar_cuisine_count": 123,
-        "local_area": "Robson Street",
-        "neighborhood": "Robson Street",
-        "recommendation_reason": "Saturated Korean restaurant market - very competitive, requires unique positioning",
-        "confidence": 1.0
+        "predicted_success_score": 0.6576036980511277,
+        "competitor_count": 15,
+        "similar_cuisine_count": 15,
+        "local_area": "West End",
+        "neighborhood": "West End",
+        "recommendation_reason": "Established Korean restaurant scene - proven market with moderate competition",
+        "confidence": 0.5
       }
     },
     {
@@ -573,18 +573,39 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.09108473037584,
-          49.24394358634827
+          -123.09696110892024,
+          49.25172295832469
         ]
       },
       "properties": {
         "cuisine_type": "Middle Eastern restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6333633099370158,
-        "competitor_count": 18,
+        "predicted_success_score": 0.7002391155371067,
+        "competitor_count": 14,
         "similar_cuisine_count": 0,
         "local_area": "Main Street",
         "neighborhood": "Main Street",
+        "recommendation_reason": "Established Middle Eastern restaurant scene - proven market with moderate competition",
+        "confidence": 0.4666666666666667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.06524482490477,
+          49.276843140275474
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Middle Eastern restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.6218765367614364,
+        "competitor_count": 18,
+        "similar_cuisine_count": 0,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
         "recommendation_reason": "Established Middle Eastern restaurant scene - proven market with moderate competition",
         "confidence": 0.6
       }
@@ -594,62 +615,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.07926519002469,
-          49.27472473324137
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Middle Eastern restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.5635636148920896,
-        "competitor_count": 2,
-        "similar_cuisine_count": 0,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Emerging area for Middle Eastern restaurant - first-mover advantage but unproven market",
-        "confidence": 0.06666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.0573586412053,
-          49.25462140944031
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Middle Eastern restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5606535700766511,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Emerging area for Middle Eastern restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.10541754388055,
-          49.24052152455354
+          -123.10987828098622,
+          49.29071115277472
         ]
       },
       "properties": {
         "cuisine_type": "Spanish restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6647554053430447,
-        "competitor_count": 5,
-        "similar_cuisine_count": 5,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
+        "predicted_success_score": 0.6720929532483062,
+        "competitor_count": 6,
+        "similar_cuisine_count": 6,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
         "recommendation_reason": "Growing market for Spanish restaurant - good opportunity with manageable competition",
-        "confidence": 0.16666666666666666
+        "confidence": 0.2
       }
     },
     {
@@ -657,250 +636,19 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11133964328504,
-          49.29066060203062
+          -123.07913847556783,
+          49.25562727500246
         ]
       },
       "properties": {
         "cuisine_type": "Spanish restaurant",
         "rank": 2,
-        "predicted_success_score": 0.6217384928167218,
-        "competitor_count": 15,
-        "similar_cuisine_count": 15,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Established Spanish restaurant scene - proven market with moderate competition",
-        "confidence": 0.5
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.0608370136493,
-          49.25794843215182
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Spanish restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5472856902816133,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Emerging area for Spanish restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.09137831028973,
-          49.25649044541734
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Pacific Northwest restaurant (Canada)",
-        "rank": 1,
-        "predicted_success_score": 0.7010523381022175,
-        "competitor_count": 14,
-        "similar_cuisine_count": 0,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Established Pacific Northwest restaurant (Canada) scene - proven market with moderate competition",
-        "confidence": 0.4666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.12265881948025,
-          49.284930445620006
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Pacific Northwest restaurant (Canada)",
-        "rank": 2,
-        "predicted_success_score": 0.5792409550435409,
-        "competitor_count": 194,
-        "similar_cuisine_count": 0,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Saturated Pacific Northwest restaurant (Canada) market - very competitive, requires unique positioning",
-        "confidence": 1.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.06238896762169,
-          49.272495736066894
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Pacific Northwest restaurant (Canada)",
-        "rank": 3,
-        "predicted_success_score": 0.5727868873415781,
-        "competitor_count": 2,
-        "similar_cuisine_count": 0,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Emerging area for Pacific Northwest restaurant (Canada) - first-mover advantage but unproven market",
-        "confidence": 0.06666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.0569239113212,
-          49.25829660262796
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Canadian restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.6421052849211147,
-        "competitor_count": 12,
-        "similar_cuisine_count": 12,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Established Canadian restaurant scene - proven market with moderate competition",
-        "confidence": 0.4
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.10832519745165,
-          49.29502343416583
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Canadian restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.5978590215188374,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Emerging area for Canadian restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.10571967084161,
-          49.25111552524392
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Canadian restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5452883369396084,
-        "competitor_count": 3,
-        "similar_cuisine_count": 3,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Growing market for Canadian restaurant - good opportunity with manageable competition",
-        "confidence": 0.1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.11543062924913,
-          49.272083539593865
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Steak house",
-        "rank": 1,
-        "predicted_success_score": 0.7179396684123874,
-        "competitor_count": 14,
-        "similar_cuisine_count": 0,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Established Steak house scene - proven market with moderate competition",
-        "confidence": 0.4666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.05733996596956,
-          49.26812927142021
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Steak house",
-        "rank": 2,
-        "predicted_success_score": 0.6794375955334163,
-        "competitor_count": 5,
-        "similar_cuisine_count": 0,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Growing market for Steak house - good opportunity with manageable competition",
-        "confidence": 0.16666666666666666
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.08975628513333,
-          49.25273100812772
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Steak house",
-        "rank": 3,
-        "predicted_success_score": 0.6765953923807434,
-        "competitor_count": 20,
-        "similar_cuisine_count": 0,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Established Steak house scene - proven market with moderate competition",
-        "confidence": 0.6666666666666666
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.12867795018202,
-          49.297302806192626
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Fine dining restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.8583833686443989,
+        "predicted_success_score": 0.6468665399218614,
         "competitor_count": 9,
-        "similar_cuisine_count": 0,
-        "local_area": "Coal Harbour",
-        "neighborhood": "Coal Harbour",
-        "recommendation_reason": "Growing market for Fine dining restaurant - good opportunity with manageable competition",
+        "similar_cuisine_count": 9,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Growing market for Spanish restaurant - good opportunity with manageable competition",
         "confidence": 0.3
       }
     },
@@ -909,19 +657,145 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11150984448014,
-          49.264287673934845
+          -123.11225306025943,
+          49.24606808871201
         ]
       },
       "properties": {
-        "cuisine_type": "Fine dining restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.6746779124314304,
-        "competitor_count": 57,
+        "cuisine_type": "Spanish restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5429723370949998,
+        "competitor_count": 2,
+        "similar_cuisine_count": 2,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Emerging area for Spanish restaurant - first-mover advantage but unproven market",
+        "confidence": 0.06666666666666667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0913157940213,
+          49.25948881950404
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Pacific Northwest restaurant (Canada)",
+        "rank": 1,
+        "predicted_success_score": 0.6706767951725898,
+        "competitor_count": 21,
         "similar_cuisine_count": 0,
-        "local_area": "Yaletown",
-        "neighborhood": "Yaletown",
-        "recommendation_reason": "Saturated Fine dining restaurant market - very competitive, requires unique positioning",
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Established Pacific Northwest restaurant (Canada) scene - proven market with moderate competition",
+        "confidence": 0.7
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10823520998001,
+          49.290205375770775
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Pacific Northwest restaurant (Canada)",
+        "rank": 2,
+        "predicted_success_score": 0.6138227256793264,
+        "competitor_count": 3,
+        "similar_cuisine_count": 0,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Growing market for Pacific Northwest restaurant (Canada) - good opportunity with manageable competition",
+        "confidence": 0.1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.07350818670693,
+          49.260229646896626
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Pacific Northwest restaurant (Canada)",
+        "rank": 3,
+        "predicted_success_score": 0.63099772446238,
+        "competitor_count": 16,
+        "similar_cuisine_count": 0,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Established Pacific Northwest restaurant (Canada) scene - proven market with moderate competition",
+        "confidence": 0.5333333333333333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.066380484421,
+          49.26029798348556
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Canadian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.6461616592106831,
+        "competitor_count": 14,
+        "similar_cuisine_count": 14,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Established Canadian restaurant scene - proven market with moderate competition",
+        "confidence": 0.4666666666666667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10571630703458,
+          49.24679161224371
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Canadian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.645195067521735,
+        "competitor_count": 10,
+        "similar_cuisine_count": 10,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Established Canadian restaurant scene - proven market with moderate competition",
+        "confidence": 0.3333333333333333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13044335410848,
+          49.28654155432345
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Canadian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5007161061987181,
+        "competitor_count": 98,
+        "similar_cuisine_count": 98,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Saturated Canadian restaurant market - very competitive, requires unique positioning",
         "confidence": 1.0
       }
     },
@@ -930,14 +804,119 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.14113065292693,
-          49.28135723201617
+          -123.08943847055889,
+          49.25970122221559
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Steak house",
+        "rank": 1,
+        "predicted_success_score": 0.6517702708645987,
+        "competitor_count": 23,
+        "similar_cuisine_count": 0,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Established Steak house scene - proven market with moderate competition",
+        "confidence": 0.7666666666666667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12564360804308,
+          49.28800847333848
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Steak house",
+        "rank": 2,
+        "predicted_success_score": 0.5661519971842194,
+        "competitor_count": 141,
+        "similar_cuisine_count": 0,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Saturated Steak house market - very competitive, requires unique positioning",
+        "confidence": 1.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.05745197863604,
+          49.257654993194734
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Steak house",
+        "rank": 3,
+        "predicted_success_score": 0.5598191486555547,
+        "competitor_count": 4,
+        "similar_cuisine_count": 0,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Growing market for Steak house - good opportunity with manageable competition",
+        "confidence": 0.13333333333333333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12264834746829,
+          49.26845554844498
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Fine dining restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.869859145083541,
+        "competitor_count": 5,
+        "similar_cuisine_count": 0,
+        "local_area": "Yaletown",
+        "neighborhood": "Yaletown",
+        "recommendation_reason": "Growing market for Fine dining restaurant - good opportunity with manageable competition",
+        "confidence": 0.16666666666666666
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.11612757106505,
+          49.29738678417815
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Fine dining restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.7268096144781172,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
+        "local_area": "Coal Harbour",
+        "neighborhood": "Coal Harbour",
+        "recommendation_reason": "Emerging area for Fine dining restaurant - first-mover advantage but unproven market",
+        "confidence": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.14556145843059,
+          49.282452239071745
         ]
       },
       "properties": {
         "cuisine_type": "Fine dining restaurant",
         "rank": 3,
-        "predicted_success_score": 0.725856965714825,
+        "predicted_success_score": 0.7053023166548971,
         "competitor_count": 2,
         "similar_cuisine_count": 0,
         "local_area": "West End",
@@ -951,20 +930,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.09257396486625,
-          49.260724304597325
+          -123.09178934263977,
+          49.27288701346547
         ]
       },
       "properties": {
         "cuisine_type": "Breakfast restaurant",
         "rank": 1,
-        "predicted_success_score": 0.5999055906697391,
-        "competitor_count": 17,
-        "similar_cuisine_count": 17,
+        "predicted_success_score": 0.639385250903822,
+        "competitor_count": 10,
+        "similar_cuisine_count": 10,
         "local_area": "Mount Pleasant",
         "neighborhood": "Mount Pleasant",
         "recommendation_reason": "Established Breakfast restaurant scene - proven market with moderate competition",
-        "confidence": 0.5666666666666667
+        "confidence": 0.3333333333333333
       }
     },
     {
@@ -972,14 +951,35 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.1433701452559,
-          49.28001226072463
+          -123.16567766405572,
+          49.25958068175056
         ]
       },
       "properties": {
         "cuisine_type": "Breakfast restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5683561216553605,
+        "predicted_success_score": 0.635519656906979,
+        "competitor_count": 9,
+        "similar_cuisine_count": 9,
+        "local_area": "Kitsilano",
+        "neighborhood": "Kitsilano",
+        "recommendation_reason": "Growing market for Breakfast restaurant - good opportunity with manageable competition",
+        "confidence": 0.3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.14115688464118,
+          49.279653775239694
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Breakfast restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5751188514159866,
         "competitor_count": 0,
         "similar_cuisine_count": 0,
         "local_area": "Kitsilano",
@@ -993,35 +993,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.07036273464371,
-          49.26142426320392
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Breakfast restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5266204559268397,
-        "competitor_count": 30,
-        "similar_cuisine_count": 30,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Competitive Breakfast restaurant market - high foot traffic but need strong differentiation",
-        "confidence": 1.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.11675996154042,
-          49.29332518586073
+          -123.11484366657302,
+          49.293212316126
         ]
       },
       "properties": {
         "cuisine_type": "Ramen restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6603181135248656,
+        "predicted_success_score": 0.6721401110878066,
         "competitor_count": 12,
         "similar_cuisine_count": 12,
         "local_area": "Downtown",
@@ -1035,20 +1014,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.05879881606758,
-          49.2664607587659
+          -123.1026286517593,
+          49.2403233200446
         ]
       },
       "properties": {
         "cuisine_type": "Ramen restaurant",
         "rank": 2,
-        "predicted_success_score": 0.6453384178410078,
-        "competitor_count": 11,
-        "similar_cuisine_count": 11,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Established Ramen restaurant scene - proven market with moderate competition",
-        "confidence": 0.36666666666666664
+        "predicted_success_score": 0.6395745533675237,
+        "competitor_count": 8,
+        "similar_cuisine_count": 8,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Growing market for Ramen restaurant - good opportunity with manageable competition",
+        "confidence": 0.26666666666666666
       }
     },
     {
@@ -1056,20 +1035,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.10411443052648,
-          49.24881281457355
+          -123.06273070083564,
+          49.271273598348266
         ]
       },
       "properties": {
         "cuisine_type": "Ramen restaurant",
         "rank": 3,
-        "predicted_success_score": 0.5082068306408525,
-        "competitor_count": 59,
-        "similar_cuisine_count": 59,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Saturated Ramen restaurant market - very competitive, requires unique positioning",
-        "confidence": 1.0
+        "predicted_success_score": 0.5052630948469639,
+        "competitor_count": 2,
+        "similar_cuisine_count": 2,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Emerging area for Ramen restaurant - first-mover advantage but unproven market",
+        "confidence": 0.06666666666666667
       }
     },
     {
@@ -1077,20 +1056,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.06010165266264,
-          49.26329792054246
+          -123.07345618203554,
+          49.258725279203794
         ]
       },
       "properties": {
         "cuisine_type": "Peruvian restaurant",
         "rank": 1,
-        "predicted_success_score": 0.590363565597486,
-        "competitor_count": 15,
-        "similar_cuisine_count": 15,
+        "predicted_success_score": 0.6488103462128999,
+        "competitor_count": 8,
+        "similar_cuisine_count": 8,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Established Peruvian restaurant scene - proven market with moderate competition",
-        "confidence": 0.5
+        "recommendation_reason": "Growing market for Peruvian restaurant - good opportunity with manageable competition",
+        "confidence": 0.26666666666666666
       }
     },
     {
@@ -1098,14 +1077,35 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.10324667938067,
-          49.25340477547348
+          -123.11294438472788,
+          49.27405435436765
         ]
       },
       "properties": {
         "cuisine_type": "Peruvian restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5485650792373095,
+        "predicted_success_score": 0.6267944410627679,
+        "competitor_count": 27,
+        "similar_cuisine_count": 27,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Competitive Peruvian restaurant market - high foot traffic but need strong differentiation",
+        "confidence": 0.9
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.09760424291535,
+          49.250380326337364
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Peruvian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5704922777036711,
         "competitor_count": 44,
         "similar_cuisine_count": 44,
         "local_area": "Main Street",
@@ -1119,166 +1119,19 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.1327557519506,
-          49.280318198749605
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Peruvian restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5150686042024057,
-        "competitor_count": 72,
-        "similar_cuisine_count": 72,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Saturated Peruvian restaurant market - very competitive, requires unique positioning",
-        "confidence": 1.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.09104691982351,
-          49.25146685882746
+          -123.10541581526606,
+          49.25730654274959
         ]
       },
       "properties": {
         "cuisine_type": "Vegan restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6017933583307311,
-        "competitor_count": 25,
-        "similar_cuisine_count": 25,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Competitive Vegan restaurant market - high foot traffic but need strong differentiation",
-        "confidence": 0.8333333333333334
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.11053894134481,
-          49.29210195455463
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Vegan restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.5636232370979013,
-        "competitor_count": 3,
-        "similar_cuisine_count": 3,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Growing market for Vegan restaurant - good opportunity with manageable competition",
-        "confidence": 0.1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.05672350911709,
-          49.2597577795556
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Vegan restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5741989127757846,
-        "competitor_count": 15,
-        "similar_cuisine_count": 15,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Established Vegan restaurant scene - proven market with moderate competition",
-        "confidence": 0.5
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.06005712414525,
-          49.27044434218684
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Asian restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.6522831792898149,
-        "competitor_count": 5,
-        "similar_cuisine_count": 5,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Growing market for Asian restaurant - good opportunity with manageable competition",
-        "confidence": 0.16666666666666666
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.09378724315178,
-          49.2488196744582
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Asian restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.6089389777073264,
-        "competitor_count": 26,
-        "similar_cuisine_count": 26,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Competitive Asian restaurant market - high foot traffic but need strong differentiation",
-        "confidence": 0.8666666666666667
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.12631497678484,
-          49.279238461152204
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Asian restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.516200008995817,
-        "competitor_count": 167,
-        "similar_cuisine_count": 167,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
-        "recommendation_reason": "Saturated Asian restaurant market - very competitive, requires unique positioning",
-        "confidence": 1.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.09254166914046,
-          49.25814913813301
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Vietnamese restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.6657044470105425,
+        "predicted_success_score": 0.654499400994942,
         "competitor_count": 12,
         "similar_cuisine_count": 12,
         "local_area": "Main Street",
         "neighborhood": "Main Street",
-        "recommendation_reason": "Established Vietnamese restaurant scene - proven market with moderate competition",
+        "recommendation_reason": "Established Vegan restaurant scene - proven market with moderate competition",
         "confidence": 0.4
       }
     },
@@ -1287,20 +1140,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.06650748092748,
-          49.27539848289977
+          -123.06233433247266,
+          49.274051142707386
         ]
       },
       "properties": {
-        "cuisine_type": "Vietnamese restaurant",
+        "cuisine_type": "Vegan restaurant",
         "rank": 2,
-        "predicted_success_score": 0.4823405843387386,
-        "competitor_count": 51,
-        "similar_cuisine_count": 51,
+        "predicted_success_score": 0.5037429954461258,
+        "competitor_count": 2,
+        "similar_cuisine_count": 2,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Saturated Vietnamese restaurant market - very competitive, requires unique positioning",
-        "confidence": 1.0
+        "recommendation_reason": "Emerging area for Vegan restaurant - first-mover advantage but unproven market",
+        "confidence": 0.06666666666666667
       }
     },
     {
@@ -1308,20 +1161,125 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.06946087191554,
-          49.25634803974337
+          -123.11981957574929,
+          49.29176980867803
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vegan restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.6063576472068132,
+        "competitor_count": 26,
+        "similar_cuisine_count": 26,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Competitive Vegan restaurant market - high foot traffic but need strong differentiation",
+        "confidence": 0.8666666666666667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.09260345001678,
+          49.25604358825372
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Asian restaurant",
+        "rank": 1,
+        "predicted_success_score": 0.6518114967886103,
+        "competitor_count": 12,
+        "similar_cuisine_count": 12,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Established Asian restaurant scene - proven market with moderate competition",
+        "confidence": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12569365431399,
+          49.292013707201676
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Asian restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.6212766894517798,
+        "competitor_count": 15,
+        "similar_cuisine_count": 15,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Established Asian restaurant scene - proven market with moderate competition",
+        "confidence": 0.5
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.05795218682164,
+          49.2641088502907
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Asian restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.6098603833649409,
+        "competitor_count": 15,
+        "similar_cuisine_count": 15,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Established Asian restaurant scene - proven market with moderate competition",
+        "confidence": 0.5
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10565820181135,
+          49.24589787186405
         ]
       },
       "properties": {
         "cuisine_type": "Vietnamese restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.6372795555163462,
-        "competitor_count": 8,
-        "similar_cuisine_count": 8,
+        "rank": 1,
+        "predicted_success_score": 0.6773785498724046,
+        "competitor_count": 10,
+        "similar_cuisine_count": 10,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Established Vietnamese restaurant scene - proven market with moderate competition",
+        "confidence": 0.3333333333333333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.06047737230962,
+          49.27066589457069
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Vietnamese restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.5307279991123592,
+        "competitor_count": 3,
+        "similar_cuisine_count": 3,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
         "recommendation_reason": "Growing market for Vietnamese restaurant - good opportunity with manageable competition",
-        "confidence": 0.26666666666666666
+        "confidence": 0.1
       }
     },
     {
@@ -1329,20 +1287,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.06684068525387,
-          49.25689865608393
+          -123.09189621741511,
+          49.25792293733042
         ]
       },
       "properties": {
         "cuisine_type": "Greek restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6310919250093467,
-        "competitor_count": 8,
-        "similar_cuisine_count": 8,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Growing market for Greek restaurant - good opportunity with manageable competition",
-        "confidence": 0.26666666666666666
+        "predicted_success_score": 0.646112297376079,
+        "competitor_count": 12,
+        "similar_cuisine_count": 12,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
+        "recommendation_reason": "Established Greek restaurant scene - proven market with moderate competition",
+        "confidence": 0.4
       }
     },
     {
@@ -1350,40 +1308,19 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11262779188783,
-          49.25298741703385
+          -123.13315078744078,
+          49.277614082720945
         ]
       },
       "properties": {
         "cuisine_type": "Greek restaurant",
         "rank": 2,
-        "predicted_success_score": 0.6116053607969316,
-        "competitor_count": 27,
-        "similar_cuisine_count": 27,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Competitive Greek restaurant market - high foot traffic but need strong differentiation",
-        "confidence": 0.9
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.11548977346814,
-          49.29048915124438
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Greek restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5594611370110463,
-        "competitor_count": 45,
-        "similar_cuisine_count": 45,
+        "predicted_success_score": 0.5078255060954218,
+        "competitor_count": 69,
+        "similar_cuisine_count": 69,
         "local_area": "Downtown",
         "neighborhood": "Downtown",
-        "recommendation_reason": "Competitive Greek restaurant market - high foot traffic but need strong differentiation",
+        "recommendation_reason": "Saturated Greek restaurant market - very competitive, requires unique positioning",
         "confidence": 1.0
       }
     },
@@ -1392,20 +1329,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.05811623198989,
-          49.276436801726696
+          -123.05947997108106,
+          49.275293115140016
         ]
       },
       "properties": {
-        "cuisine_type": "Turkish restaurant",
-        "rank": 1,
-        "predicted_success_score": 0.6552729712462598,
-        "competitor_count": 5,
-        "similar_cuisine_count": 5,
+        "cuisine_type": "Greek restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5595042317132372,
+        "competitor_count": 0,
+        "similar_cuisine_count": 0,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Growing market for Turkish restaurant - good opportunity with manageable competition",
-        "confidence": 0.16666666666666666
+        "recommendation_reason": "Emerging area for Greek restaurant - first-mover advantage but unproven market",
+        "confidence": 0.0
       }
     },
     {
@@ -1413,18 +1350,18 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.09617872255595,
-          49.24596125764668
+          -123.07773869566192,
+          49.27056601277812
         ]
       },
       "properties": {
         "cuisine_type": "Turkish restaurant",
-        "rank": 2,
-        "predicted_success_score": 0.5945069734414783,
+        "rank": 1,
+        "predicted_success_score": 0.5700112522697609,
         "competitor_count": 0,
         "similar_cuisine_count": 0,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
         "recommendation_reason": "Emerging area for Turkish restaurant - first-mover advantage but unproven market",
         "confidence": 0.0
       }
@@ -1434,18 +1371,39 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.13058009739075,
-          49.29107105371664
+          -123.1241817791163,
+          49.271340048753316
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Turkish restaurant",
+        "rank": 2,
+        "predicted_success_score": 0.5639232376676515,
+        "competitor_count": 46,
+        "similar_cuisine_count": 46,
+        "local_area": "Downtown",
+        "neighborhood": "Downtown",
+        "recommendation_reason": "Competitive Turkish restaurant market - high foot traffic but need strong differentiation",
+        "confidence": 1.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.10162934344801,
+          49.24487655359286
         ]
       },
       "properties": {
         "cuisine_type": "Turkish restaurant",
         "rank": 3,
-        "predicted_success_score": 0.5247856192671807,
-        "competitor_count": 107,
-        "similar_cuisine_count": 107,
-        "local_area": "Downtown",
-        "neighborhood": "Downtown",
+        "predicted_success_score": 0.48483515006155825,
+        "competitor_count": 62,
+        "similar_cuisine_count": 62,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
         "recommendation_reason": "Saturated Turkish restaurant market - very competitive, requires unique positioning",
         "confidence": 1.0
       }
@@ -1455,20 +1413,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.07176160938432,
-          49.25637357405712
+          -123.10127288171364,
+          49.240006258765284
         ]
       },
       "properties": {
         "cuisine_type": "Lebanese restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6294780560743936,
-        "competitor_count": 6,
-        "similar_cuisine_count": 6,
-        "local_area": "Commercial Drive",
-        "neighborhood": "Commercial Drive",
+        "predicted_success_score": 0.6569838903719786,
+        "competitor_count": 8,
+        "similar_cuisine_count": 8,
+        "local_area": "Main Street",
+        "neighborhood": "Main Street",
         "recommendation_reason": "Growing market for Lebanese restaurant - good opportunity with manageable competition",
-        "confidence": 0.2
+        "confidence": 0.26666666666666666
       }
     },
     {
@@ -1476,19 +1434,40 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.11805223046343,
-          49.27909198174661
+          -123.05977978108109,
+          49.276837130538816
         ]
       },
       "properties": {
         "cuisine_type": "Lebanese restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5100571456335466,
-        "competitor_count": 182,
-        "similar_cuisine_count": 182,
+        "predicted_success_score": 0.635386379280864,
+        "competitor_count": 5,
+        "similar_cuisine_count": 5,
+        "local_area": "Commercial Drive",
+        "neighborhood": "Commercial Drive",
+        "recommendation_reason": "Growing market for Lebanese restaurant - good opportunity with manageable competition",
+        "confidence": 0.16666666666666666
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.13288289222974,
+          49.27533537964391
+        ]
+      },
+      "properties": {
+        "cuisine_type": "Lebanese restaurant",
+        "rank": 3,
+        "predicted_success_score": 0.5567450222463546,
+        "competitor_count": 33,
+        "similar_cuisine_count": 33,
         "local_area": "Downtown",
         "neighborhood": "Downtown",
-        "recommendation_reason": "Saturated Lebanese restaurant market - very competitive, requires unique positioning",
+        "recommendation_reason": "Competitive Lebanese restaurant market - high foot traffic but need strong differentiation",
         "confidence": 1.0
       }
     },
@@ -1497,41 +1476,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.10976021878508,
-          49.258043970385984
-        ]
-      },
-      "properties": {
-        "cuisine_type": "Lebanese restaurant",
-        "rank": 3,
-        "predicted_success_score": 0.5709664550366943,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
-        "local_area": "Main Street",
-        "neighborhood": "Main Street",
-        "recommendation_reason": "Emerging area for Lebanese restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.11100297387775,
-          49.25882051520018
+          -123.10645960449736,
+          49.259162230733594
         ]
       },
       "properties": {
         "cuisine_type": "Sushi restaurant",
         "rank": 1,
-        "predicted_success_score": 0.6046882488465434,
-        "competitor_count": 18,
-        "similar_cuisine_count": 18,
+        "predicted_success_score": 0.661857533876394,
+        "competitor_count": 8,
+        "similar_cuisine_count": 8,
         "local_area": "Main Street",
         "neighborhood": "Main Street",
-        "recommendation_reason": "Established Sushi restaurant scene - proven market with moderate competition",
-        "confidence": 0.6
+        "recommendation_reason": "Growing market for Sushi restaurant - good opportunity with manageable competition",
+        "confidence": 0.26666666666666666
       }
     },
     {
@@ -1539,20 +1497,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.06200941758613,
-          49.25604507237029
+          -123.0588672748455,
+          49.26650112357644
         ]
       },
       "properties": {
         "cuisine_type": "Sushi restaurant",
         "rank": 2,
-        "predicted_success_score": 0.5431715869734163,
-        "competitor_count": 0,
-        "similar_cuisine_count": 0,
+        "predicted_success_score": 0.6458193825788534,
+        "competitor_count": 11,
+        "similar_cuisine_count": 11,
         "local_area": "Commercial Drive",
         "neighborhood": "Commercial Drive",
-        "recommendation_reason": "Emerging area for Sushi restaurant - first-mover advantage but unproven market",
-        "confidence": 0.0
+        "recommendation_reason": "Established Sushi restaurant scene - proven market with moderate competition",
+        "confidence": 0.36666666666666664
       }
     },
     {
@@ -1560,16 +1518,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -123.13167653470613,
-          49.28223073893287
+          -123.1304769166996,
+          49.29118770316077
         ]
       },
       "properties": {
         "cuisine_type": "Sushi restaurant",
         "rank": 3,
-        "predicted_success_score": 0.5148758674612226,
-        "competitor_count": 68,
-        "similar_cuisine_count": 68,
+        "predicted_success_score": 0.5195058289875305,
+        "competitor_count": 107,
+        "similar_cuisine_count": 107,
         "local_area": "Downtown",
         "neighborhood": "Downtown",
         "recommendation_reason": "Saturated Sushi restaurant market - very competitive, requires unique positioning",
@@ -1580,8 +1538,8 @@
   "properties": {
     "title": "Vancouver Restaurant Location Recommendations by Cuisine",
     "description": "AI-generated optimal locations for new restaurants by cuisine type",
-    "generated_date": "2025-08-13T08:27:52.327062",
-    "total_recommendations": 75,
+    "generated_date": "2025-08-13T09:09:40.365005",
+    "total_recommendations": 73,
     "cuisine_types_analyzed": 25
   }
 }
