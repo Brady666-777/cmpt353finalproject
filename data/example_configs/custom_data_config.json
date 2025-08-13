@@ -1,0 +1,25 @@
+{
+  "business_data": {
+    "filename": "business-licences.geojson",
+    "type": "geojson",
+    "output_name": "filtered_businesses.geojson",
+    "filter_keywords": ["restaurant", "cafe", "bakery", "food"],
+    "filter_columns": ["businesstype", "businessname"]
+  },
+  "population_data": {
+    "filename": "census_data.csv",
+    "type": "csv",
+    "output_name": "processed_census.csv",
+    "transformations": [
+      {
+        "type": "filter_columns",
+        "columns": ["GEO_NAME", "TOTAL_POPULATION", "MEDIAN_AGE"]
+      }
+    ]
+  },
+  "api_results": {
+    "filename": "api_response.json",
+    "type": "json",
+    "output_name": "processed_api_data.json"
+  }
+}

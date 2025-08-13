@@ -128,7 +128,7 @@ class RealDataProcessor:
         logger.info("Loading Google reviews data...")
         
         try:
-            df = pd.read_csv(f"{self.raw_data_dir}/dataset_crawler-google-review_2025-08-06_03-55-37-484.csv")
+            df = pd.read_csv(f"{self.raw_data_dir}/google-review_2025-08-06_03-55-37-484.csv")
             
             logger.info(f"Loaded {len(df)} restaurants from Google reviews")
             logger.info(f"Columns: {list(df.columns)}")
@@ -168,6 +168,84 @@ class RealDataProcessor:
         except Exception as e:
             logger.error(f"Error loading Google reviews data: {e}")
             return pd.DataFrame()
+    
+    def load_combined_google_data(self) -> pd.DataFrame:
+        """Load and combine both Google datasets for maximum data"""
+        logger.info("Loading and combining both Google datasets...")
+        
+        combined_data = []
+        
+        # Load the reviews dataset (main one with more variation)
+        try:
+            df_reviews = pd.read_csv(f"{self.raw_data_dir}/google-review_2025-08-06_03-55-37-484.csv")
+            logger.info(f"Loaded {len(df_reviews)} restaurants from Google reviews file")
+            
+            # Standardize columns
+            df_reviews_clean = df_reviews.copy()
+            df_reviews_clean['business_name'] = df_reviews_clean.get('title', '')
+            df_reviews_clean['stars'] = pd.to_numeric(df_reviews_clean.get('totalScore', 0), errors='coerce')
+            df_reviews_clean['review_count'] = pd.to_numeric(df_reviews_clean.get('reviewsCount', 0), errors='coerce')
+            df_reviews_clean['primary_category'] = df_reviews_clean.get('categoryName', '')
+            df_reviews_clean['address'] = df_reviews_clean.get('street', '')
+            df_reviews_clean['city'] = df_reviews_clean.get('city', 'Vancouver')
+            df_reviews_clean['price_level'] = 2  # Default moderate pricing
+            df_reviews_clean['data_source'] = 'google_reviews'
+            
+            combined_data.append(df_reviews_clean)
+            
+        except Exception as e:
+            logger.warning(f"Could not load Google reviews file: {e}")
+        
+        # Load the overview dataset  
+        try:
+            df_overview = pd.read_csv(f"{self.raw_data_dir}/good-restaurant-in-vancouver-overview.csv")
+            logger.info(f"Loaded {len(df_overview)} restaurants from Google overview file")
+            
+            # Standardize columns
+            df_overview_clean = df_overview.copy()
+            df_overview_clean['business_name'] = df_overview_clean.get('name', '')
+            df_overview_clean['stars'] = pd.to_numeric(df_overview_clean.get('rating', 0), errors='coerce')
+            df_overview_clean['review_count'] = pd.to_numeric(df_overview_clean.get('reviews', 0), errors='coerce')
+            df_overview_clean['primary_category'] = df_overview_clean.get('main_category', '')
+            df_overview_clean['address'] = df_overview_clean.get('address', '')
+            df_overview_clean['city'] = 'Vancouver'
+            df_overview_clean['price_level'] = 2  # Default moderate pricing
+            df_overview_clean['data_source'] = 'google_overview'
+            
+            combined_data.append(df_overview_clean)
+            
+        except Exception as e:
+            logger.warning(f"Could not load Google overview file: {e}")
+        
+        if not combined_data:
+            logger.error("No Google datasets could be loaded")
+            return pd.DataFrame()
+        
+        # Combine datasets
+        df_combined = pd.concat(combined_data, ignore_index=True)
+        
+        # Remove duplicates based on business name and address
+        initial_count = len(df_combined)
+        df_combined = df_combined.drop_duplicates(subset=['business_name', 'address'], keep='first')
+        final_count = len(df_combined)
+        
+        logger.info(f"Combined datasets: {initial_count} -> {final_count} unique restaurants (removed {initial_count - final_count} duplicates)")
+        
+        # Create full address
+        df_combined['full_address'] = df_combined['address'] + ', ' + df_combined['city'] + ', BC'
+        
+        # Filter out invalid data
+        df_combined = df_combined[
+            (df_combined['stars'] > 0) & 
+            (df_combined['stars'] <= 5) &
+            (df_combined['review_count'] >= 0)
+        ].copy()
+        
+        logger.info(f"After filtering: {len(df_combined)} valid restaurants")
+        logger.info(f"Rating range: {df_combined['stars'].min():.1f} - {df_combined['stars'].max():.1f}")
+        logger.info(f"Review count range: {df_combined['review_count'].min():.0f} - {df_combined['review_count'].max():.0f}")
+        
+        return df_combined
     
     def geocode_addresses(self, df: pd.DataFrame) -> pd.DataFrame:
         """Geocode addresses to get coordinates"""
@@ -555,7 +633,96 @@ class RealDataProcessor:
         """Main processing pipeline for real data"""
         logger.info("Starting real data processing pipeline...")
         
-        # Step 1: Load and process business licenses (these already have coordinates)
+        # Step 1: Try to load and process combined Google data first (maximum data and variation)
+        google_combined = self.load_combined_google_data()
+        if not google_combined.empty and len(google_combined) > 50:
+            logger.info(f"Using combined Google data as primary source: {len(google_combined)} restaurants")
+            
+            # Geocode the Google data
+            google_geocoded = self.geocode_addresses(google_combined)
+            
+            # Filter out restaurants without coordinates
+            google_geocoded = google_geocoded.dropna(subset=['latitude', 'longitude'])
+            logger.info(f"After geocoding: {len(google_geocoded)} restaurants with coordinates")
+            
+            if len(google_geocoded) > 0:
+                # Calculate competitive features
+                google_with_competition = self.calculate_competitive_features(google_geocoded)
+
+                # Create success score
+                google_final = self.create_success_score(google_with_competition)
+
+                # Prepare model features
+                X, feature_names = self.prepare_model_features(google_final)
+
+                if not X.empty:
+                    # Save processed data
+                    self.save_processed_data(google_final, 'restaurants_with_features.csv')
+                    self.save_processed_data(X, 'model_features.csv')
+
+                    # Save feature names
+                    pd.Series(feature_names).to_csv(
+                        f"{self.processed_data_dir}/feature_names.csv", 
+                        index=False, header=['feature_name']
+                    )
+
+                    logger.info("Data processing completed successfully!")
+                    
+                    # Print processing summary
+                    print(f"\nPROCESSING SUMMARY:")
+                    print(f"Total restaurants processed: {len(google_final)}")
+                    print(f"Features created: {len(feature_names)}")
+                    print(f"Feature names: {feature_names}")
+                    print(f"Success score range: {google_final['success_score'].min():.3f} - {google_final['success_score'].max():.3f}")
+                    print(f"Average success score: {google_final['success_score'].mean():.3f}")
+                    return
+
+        # Fallback: Try individual Google reviews data
+        google_reviews = self.load_google_reviews_data()
+        if not google_reviews.empty and len(google_reviews) > 50:
+            logger.info(f"Using Google reviews data as primary source: {len(google_reviews)} restaurants")
+            
+            # Geocode the Google reviews data
+            google_geocoded = self.geocode_addresses(google_reviews)
+            
+            # Filter out restaurants without coordinates
+            google_geocoded = google_geocoded.dropna(subset=['latitude', 'longitude'])
+            logger.info(f"After geocoding: {len(google_geocoded)} restaurants with coordinates")
+            
+            if len(google_geocoded) > 0:
+                # Calculate competitive features
+                google_with_competition = self.calculate_competitive_features(google_geocoded)
+
+                # Create success score
+                google_final = self.create_success_score(google_with_competition)
+
+                # Prepare model features
+                X, feature_names = self.prepare_model_features(google_final)
+
+                if not X.empty:
+                    # Save processed data
+                    self.save_processed_data(google_final, 'restaurants_with_features.csv')
+                    self.save_processed_data(X, 'model_features.csv')
+
+                    # Save feature names
+                    pd.Series(feature_names).to_csv(
+                        f"{self.processed_data_dir}/feature_names.csv", 
+                        index=False, header=['feature_name']
+                    )
+
+                    logger.info("Data processing completed successfully!")
+                    
+                    # Print processing summary
+                    print(f"\nPROCESSING SUMMARY:")
+                    print(f"Total restaurants processed: {len(google_final)}")
+                    print(f"Features created: {len(feature_names)}")
+                    print(f"Feature names: {feature_names}")
+                    print(f"Success score range: {google_final['success_score'].min():.3f} - {google_final['success_score'].max():.3f}")
+                    print(f"Average success score: {google_final['success_score'].mean():.3f}")
+                    return
+
+        # Fallback: Load and process business licenses if Google data not available
+        logger.info("Falling back to business license data...")
         business_licenses = self.load_business_licenses()
         if not business_licenses.empty:
             business_data = self.process_business_data(business_licenses)

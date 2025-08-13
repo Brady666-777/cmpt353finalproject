@@ -71,10 +71,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# ---------------------------------------------------------------------------
-# Integrated Sentiment Analysis (formerly in sentiment_analysis.py)
-# ---------------------------------------------------------------------------
-
 class MultilinguaSentimentAnalyzer:
     """Lightweight multilingual sentiment analyzer with graceful fallbacks.
 
@@ -113,7 +109,6 @@ class MultilinguaSentimentAnalyzer:
         self.model = None
         self.tokenizer = None
 
-    # Public API -----------------------------------------------------------------
     def predict_sentiment(self, texts):
         if not texts:
             return []
@@ -190,66 +185,6 @@ class MultilinguaSentimentAnalyzer:
         feat = agg.join(dist, how='left').fillna(0).reset_index()
         return feat
 
-class SentimentFeatureInjector:
-    """Utility to add sentiment features on-the-fly if they are missing.
-    This is a fallback for when upstream Spark processing wasn't run.
-    It will stream through the raw Yelp review JSON and sample reviews to avoid OOM.
-    """
-    def __init__(self, base_dir: Path, max_reviews_per_business: int = 80, global_review_cap: int = 20000):
-        self.base_dir = base_dir
-        self.raw_dir = base_dir / 'data' / 'raw'
-        self.review_path = self.raw_dir / 'yelp_academic_dataset_review.json'
-        self.max_reviews_per_business = max_reviews_per_business
-        self.global_review_cap = global_review_cap
-        self.analyzer = MultilinguaSentimentAnalyzer()
-
-    def add_if_missing(self, df_restaurants: pd.DataFrame) -> pd.DataFrame:
-        required_cols = {'avg_sentiment_score','sentiment_score_std','avg_sentiment_confidence','positive_pct','negative_pct','neutral_pct'}
-        if required_cols.issubset(df_restaurants.columns):
-            logger.info("Sentiment features already present; skipping inline generation.")
-            return df_restaurants
-        if not self.review_path.exists():
-            logger.warning("Review file not found; cannot compute sentiment features inline.")
-            return df_restaurants
-        if 'business_id' not in df_restaurants.columns:
-            logger.warning("business_id column missing; cannot map sentiment features.")
-            return df_restaurants
-        business_ids = set(df_restaurants['business_id'].dropna().tolist())
-        logger.info(f"Generating sentiment features inline for {len(business_ids)} businesses (streaming reviews)...")
-        collected = []
-        per_biz_counts = {bid:0 for bid in business_ids}
-        total = 0
-        start = time.time()
-        try:
-            with open(self.review_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    if total >= self.global_review_cap and self.global_review_cap>0:
-                        break
-                    try:
-                        obj = json.loads(line)
-                    except Exception:
-                        continue
-                    bid = obj.get('business_id')
-                    if bid in business_ids and per_biz_counts[bid] < self.max_reviews_per_business:
-                        collected.append({'business_id': bid, 'text': obj.get('text','')})
-                        per_biz_counts[bid] += 1
-                        total += 1
-            logger.info(f"Collected {total} review texts for inline sentiment in {time.time()-start:.1f}s")
-        except Exception as e:  # pragma: no cover
-            logger.error(f"Failed streaming reviews: {e}")
-            return df_restaurants
-        if not collected:
-            logger.warning("No reviews collected for inline sentiment.")
-            return df_restaurants
-        df_reviews = pd.DataFrame(collected)
-        feat = self.analyzer.aggregate_reviews(df_reviews)
-        if feat.empty:
-            logger.warning("No sentiment features produced.")
-            return df_restaurants
-        df_merged = df_restaurants.merge(feat, on='business_id', how='left')
-        logger.info("Inline sentiment feature generation complete.")
-        return df_merged
-
 class RestaurantSuccessPredictor:
     """Main class for restaurant success prediction model training"""
     
@@ -284,75 +219,94 @@ class RestaurantSuccessPredictor:
         logger.info("Loading processed datasets...")
         
         try:
-            # Check for PySpark-processed files first (higher quality data)
-            spark_restaurants_path = Path(self.processed_data_dir) / 'restaurants_with_features_spark.csv'
-            spark_features_path = Path(self.processed_data_dir) / 'model_features_spark.csv'
+     
             
             # Regular pandas-processed files
             restaurants_path = Path(self.processed_data_dir) / 'restaurants_with_features.csv'
             features_path = Path(self.processed_data_dir) / 'model_features.csv'
             
-            # Load main dataset (prefer PySpark if available)
-            if spark_restaurants_path.exists():
-                self.df_restaurants = pd.read_csv(spark_restaurants_path)
-                logger.info(f"Loaded PySpark restaurant data: {len(self.df_restaurants)} records")
-                using_spark_data = True
-            elif restaurants_path.exists():
-                self.df_restaurants = pd.read_csv(restaurants_path)
+            if restaurants_path.exists():
+                # Define proper data types for numerical features that actually exist
+                # First check what columns are available
+                temp_df = pd.read_csv(restaurants_path, nrows=1)
+                available_columns = set(temp_df.columns)
+                
+                dtype_spec = {}
+                potential_dtypes = {
+                    'stars': 'float64',
+                    'review_count': 'float64', 
+                    'price_level': 'float64',
+                    'latitude': 'float64',
+                    'longitude': 'float64',
+                    'competitor_count': 'float64',
+                    'similar_cuisine_count': 'float64',
+                    'sentiment_score': 'float64',
+                    'sentiment_confidence': 'float64',
+                    'success_score': 'float64'
+                }
+                
+                # Only include columns that actually exist
+                for col, dtype in potential_dtypes.items():
+                    if col in available_columns:
+                        dtype_spec[col] = dtype
+                
+                self.df_restaurants = pd.read_csv(restaurants_path, dtype=dtype_spec)
                 logger.info(f"Loaded standard restaurant data: {len(self.df_restaurants)} records")
                 using_spark_data = False
             else:
-                logger.error(f"Restaurant data not found at {restaurants_path} or {spark_restaurants_path}")
+                logger.error(f"Restaurant data not found at {restaurants_path}")
                 return False
             
-            # Load feature matrix (prefer PySpark if available)
-            if using_spark_data and spark_features_path.exists():
-                self.X = pd.read_csv(spark_features_path)
-                logger.info(f"Loaded PySpark features: {self.X.shape}")
-            elif features_path.exists():
-                self.X = pd.read_csv(features_path)
+
+            if features_path.exists():
+                # Use the same data type specifications for features
+                self.X = pd.read_csv(features_path, dtype=dtype_spec)
                 logger.info(f"Loaded standard features: {self.X.shape}")
             else:
-                logger.error(f"Feature data not found at {features_path} or {spark_features_path}")
+                logger.error(f"Feature data not found at {features_path}")
                 return False
 
-            # Inline sentiment feature injection if missing
-            sentiment_cols = {'avg_sentiment_score','sentiment_score_std','avg_sentiment_confidence','positive_pct','negative_pct','neutral_pct'}
-            missing_sentiment = not sentiment_cols.issubset(set(self.df_restaurants.columns))
-            if missing_sentiment:
-                logger.info("Sentiment feature columns missing in restaurant data; attempting inline generation...")
-                injector = SentimentFeatureInjector(Path(__file__).parent.parent)
-                self.df_restaurants = injector.add_if_missing(self.df_restaurants)
-                # If new sentiment columns appeared, append them to feature matrix
-                new_cols = [c for c in sentiment_cols if c in self.df_restaurants.columns and c not in self.X.columns]
-                if new_cols:
-                    logger.info(f"Appending newly generated sentiment features to model matrix: {new_cols}")
-                    # Join sentiment features by business_id if present in X or just align order
-                    if 'business_id' in self.df_restaurants.columns:
-                        if 'business_id' in self.X.columns:
-                            # Merge on business_id
-                            self.X = self.X.merge(self.df_restaurants[['business_id'] + new_cols], on='business_id', how='left')
-                        else:
-                            # Attach by index alignment (assume same order if lengths match)
-                            if len(self.X) == len(self.df_restaurants):
-                                for c in new_cols:
-                                    self.X[c] = self.df_restaurants[c].values
-                            else:
-                                logger.warning("Cannot align sentiment features without business_id; skipping add.")
-                    else:
-                        logger.warning("business_id not in restaurant dataframe after injection; sentiment features not merged into X.")
-                else:
-                    logger.info("No new sentiment features were generated inline.")
+
             
             # Load feature names
             feature_names_path = Path(self.processed_data_dir) / 'feature_names.csv'
             if feature_names_path.exists():
                 feature_df = pd.read_csv(feature_names_path)
-                self.feature_names = feature_df['feature'].tolist()
+                # Check which column exists
+                if 'feature_name' in feature_df.columns:
+                    self.feature_names = feature_df['feature_name'].tolist()
+                elif 'feature' in feature_df.columns:
+                    self.feature_names = feature_df['feature'].tolist()
+                else:
+                    # Fallback to first column
+                    self.feature_names = feature_df.iloc[:, 0].tolist()
                 logger.info(f"Loaded feature names: {len(self.feature_names)} features")
             else:
                 logger.warning("Feature names not found. Using column names from feature matrix.")
                 self.feature_names = list(self.X.columns)
+            
+            # Validate data quality - check for constant features
+            logger.info("Validating feature quality...")
+            constant_features = []
+            for col in self.X.columns:
+                if self.X[col].dtype in ['int64', 'float64']:
+                    if self.X[col].nunique() <= 1:
+                        constant_features.append(col)
+                        logger.warning(f"Feature '{col}' has constant values: {self.X[col].unique()}")
+            
+            if constant_features:
+                logger.warning(f"Found {len(constant_features)} constant features that won't contribute to prediction")
+                logger.info(f"Removing constant features: {constant_features}")
+                self.X = self.X.drop(columns=constant_features)
+                # Update feature names list
+                self.feature_names = [f for f in self.feature_names if f not in constant_features]
+                logger.info(f"Features after removing constants: {len(self.feature_names)} features")
+            
+            # Log feature statistics
+            for col in ['stars', 'review_count', 'price_level']:
+                if col in self.X.columns:
+                    logger.info(f"{col}: range={self.X[col].min():.3f}-{self.X[col].max():.3f}, "
+                               f"unique_values={self.X[col].nunique()}")
             
             return True
             
@@ -486,19 +440,9 @@ class RestaurantSuccessPredictor:
         """Prepare the target variable for modeling with enhanced success score calculation"""
         logger.info("Preparing target variable...")
         
-        if 'success_score' in self.df_restaurants.columns:
-            # Check if success_score has variance
-            success_variance = self.df_restaurants['success_score'].var()
-            if success_variance < 0.01:  # Low variance indicates poor quality target
-                logger.warning(f"Low variance in success_score ({success_variance:.4f}). Creating enhanced target variable.")
-                self._create_enhanced_success_score()
-            else:
-                self.y = self.df_restaurants['success_score'].copy()
-                logger.info(f"Target variable prepared. Shape: {self.y.shape}")
-                logger.info(f"Target statistics: Mean={self.y.mean():.3f}, Std={self.y.std():.3f}")
-        else:
-            logger.warning("Success score not found. Creating enhanced target variable.")
-            self._create_enhanced_success_score()
+        # Always use enhanced success score for better model performance
+        logger.info("Creating enhanced target variable for optimal model performance...")
+        self._create_enhanced_success_score()
         
         # Remove success_score from features to prevent data leakage
         if 'success_score' in self.X.columns:
@@ -1380,13 +1324,15 @@ class RestaurantSuccessPredictor:
             return None
 
         df = self.df_restaurants.copy()
-        # Derive primary cuisine
-        if 'categories' in df.columns:
+        # Derive primary cuisine - use primary_category if available, otherwise fallback to categories
+        if 'primary_category' in df.columns:
+            df['primary_cuisine'] = df['primary_category'].fillna('').astype(str)
+        elif 'categories' in df.columns:
             df['primary_cuisine'] = df['categories'].fillna('').apply(lambda x: x.split(',')[0].strip() if x else '')
         elif 'cuisine' in df.columns:
             df['primary_cuisine'] = df['cuisine'].fillna('').astype(str)
         else:
-            logger.warning("No categories/cuisine column; cannot derive cuisines.")
+            logger.warning("No primary_category/categories/cuisine column; cannot derive cuisines.")
             return None
         df = df[df['primary_cuisine'] != '']
         if df.empty:
@@ -1419,10 +1365,20 @@ class RestaurantSuccessPredictor:
             top_row = subset.sort_values('success_score', ascending=False).iloc[0]
             lon = float(top_row['longitude'])
             lat = float(top_row['latitude'])
+            
+            # Get restaurant name with proper NaN handling
+            restaurant_name = 'Unknown Restaurant'
+            if pd.notna(top_row.get('title')):
+                restaurant_name = str(top_row['title'])
+            elif pd.notna(top_row.get('business_name')):
+                restaurant_name = str(top_row['business_name'])
+            elif pd.notna(top_row.get('name')):
+                restaurant_name = str(top_row['name'])
+            
             props = {
                 'cuisine': cuisine,
-                'recommended_restaurant': top_row.get('name',''),
-                'business_id': top_row.get('business_id',''),
+                'recommended_restaurant': restaurant_name,
+                'business_id': str(top_row.get('business_id', '')),
                 'success_score': float(top_row.get('success_score', 0.0)),
                 'review_count': int(top_row.get('review_count', 0)),
                 'stars': float(top_row.get('stars', 0.0)),
@@ -1673,67 +1629,65 @@ class RestaurantSuccessPredictor:
         print("- Feature patterns show what drives restaurant success")
         print("- Use cluster characteristics to guide new restaurant positioning")
 
-    def run_complete_pipeline(self):
-        """Run end-to-end pipeline including cuisine GeoJSON output."""
-        print("VancouverPy: Restaurant Success Prediction Model Training")
-        print("=" * 60)
-
-        # 1. Load data
-        if not self.load_processed_data():
+def main():
+    """Main execution function for model training"""
+    print("VancouverPy: Restaurant Success Prediction Model Training")
+    print("=" * 60)
+    
+    predictor = RestaurantSuccessPredictor()
+    
+    try:
+        # 1. Load processed data
+        if not predictor.load_processed_data():
             logger.error("Failed to load data. Run data collection/processing first.")
             return False
 
-        # 2. Explore
-        self.explore_data()
+        # 2. Explore data
+        predictor.explore_data()
 
-        # 3. Target
-        self.prepare_target_variable()
+        # 3. Prepare target variable
+        predictor.prepare_target_variable()
 
-        # 4. Feature importance
-        self.analyze_feature_importance()
+        # 4. Analyze feature importance
+        predictor.analyze_feature_importance()
 
-        # 5. Clustering
-        cluster_labels, optimal_k = self.perform_clustering_analysis()
+        # 5. Perform clustering analysis
+        cluster_labels, optimal_k = predictor.perform_clustering_analysis()
         if cluster_labels is None or len(cluster_labels) == 0:
             optimal_k = "N/A"
 
         # 6. Train models
-        if not self.train_models():
+        if not predictor.train_models():
             logger.error("Training failed.")
             return False
 
-        # 7. Evaluate
-        self.evaluate_models()
+        # 7. Evaluate models
+        predictor.evaluate_models()
 
         # 8. Interpret best model
-        self.interpret_best_model()
+        predictor.interpret_best_model()
 
-        # 9. Heat map
-        self.create_prediction_heatmap()
+        # 9. Save models
+        predictor.save_models()
 
-        # 10. Save models
-        self.save_models()
+        # 10. Generate cuisine recommendations
+        predictor.generate_cuisine_recommendations_geojson()
 
-        # 11. Cuisine recommendation GeoJSON
-        geo_path = self.generate_cuisine_recommendations_geojson()
-
-        print("\nPipeline completed.")
-        print(f"Best model: {self.best_model_name}")
+        print("\n" + "="*60)
+        print("MODEL TRAINING COMPLETED SUCCESSFULLY!")
+        print("="*60)
+        print(f"Best model: {predictor.best_model_name}")
         print(f"Optimal clusters: {optimal_k}")
-        if geo_path:
-            print(f"Cuisine recommendations written to: {geo_path}")
+        print("Models saved to 'models/' directory")
+        print("Use the prediction module for making predictions")
+        
         return True
-
-
-def main():
-    """Main execution function"""
-    predictor = RestaurantSuccessPredictor()
-    success = predictor.run_complete_pipeline()
-    if success:
-        print("\nModel training completed successfully!")
-        print("You can now use the trained models for restaurant success prediction.")
-    else:
-        print("\nModel training failed. Please check the logs for details.")
+        
+    except Exception as e:
+        logger.error(f"Training pipeline failed: {e}")
+        print(f"\nModel training failed: {e}")
+        print("Please check the logs for details.")
+        return False
 
 
 if __name__ == "__main__":

@@ -48,7 +48,7 @@
       },
       "properties": {
         "cuisine": "Indian restaurant",
-        "recommended_restaurant": "House Of Dosas | Kingsway",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.8415168897559581,
         "review_count": 9250,
@@ -120,7 +120,7 @@
       },
       "properties": {
         "cuisine": "Vietnamese restaurant",
-        "recommended_restaurant": "The Lunch Lady",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.8014443733226192,
         "review_count": 3310,
@@ -174,7 +174,7 @@
       },
       "properties": {
         "cuisine": "Seafood restaurant",
-        "recommended_restaurant": "Joe Fortes Seafood & Chop House",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.8342411052227889,
         "review_count": 7967,
@@ -228,7 +228,7 @@
       },
       "properties": {
         "cuisine": "Breakfast restaurant",
-        "recommended_restaurant": "Pur & Simple",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.7939492770614524,
         "review_count": 2838,
@@ -246,7 +246,7 @@
       },
       "properties": {
         "cuisine": "Pacific Northwest restaurant (Canada)",
-        "recommended_restaurant": "Salmon n' Bannock",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.7656965355183131,
         "review_count": 1294,
@@ -354,7 +354,7 @@
       },
       "properties": {
         "cuisine": "Canadian restaurant",
-        "recommended_restaurant": "Nightingale",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.7937582546658595,
         "review_count": 3471,
@@ -372,7 +372,7 @@
       },
       "properties": {
         "cuisine": "Cantonese restaurant",
-        "recommended_restaurant": "Chinatown BBQ",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.7764617844872213,
         "review_count": 1982,
@@ -390,7 +390,7 @@
       },
       "properties": {
         "cuisine": "Ramen restaurant",
-        "recommended_restaurant": "Ramen Danbo Robson",
+        "recommended_restaurant": NaN,
         "business_id": "",
         "success_score": 0.8226016651199061,
         "review_count": 5110,
