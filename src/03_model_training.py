@@ -12,31 +12,33 @@ Author: VancouverPy Project Team
 Date: August 2025
 """
 
+# Standard library imports
 import json
 import logging
 import time
+import traceback
 import warnings
 from pathlib import Path
 
+# Third-party imports
 import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import xgboost as xgb
+
+# Scikit-learn imports
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-from sklearn.metrics import (mean_absolute_error, mean_squared_error, r2_score,
-                             silhouette_score, adjusted_rand_score)
-from sklearn.model_selection import (GridSearchCV, cross_val_score,
-                                     train_test_split)
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
+from sklearn.linear_model import Lasso, LinearRegression, Ridge
+from sklearn.metrics import (adjusted_rand_score, mean_absolute_error, 
+                             mean_squared_error, r2_score, silhouette_score)
+from sklearn.model_selection import GridSearchCV, cross_val_score, train_test_split
 from sklearn.preprocessing import StandardScaler
 
-warnings.filterwarnings('ignore')
-
-# Visualization imports
+# Optional visualization imports
 try:
     import folium
     from folium.plugins import HeatMap
@@ -44,6 +46,17 @@ try:
 except ImportError:
     FOLIUM_AVAILABLE = False
     print("Warning: Folium not available. Map visualizations will be skipped.")
+
+# Optional transformer imports
+try:
+    from transformers import AutoTokenizer, AutoModelForSequenceClassification
+    import torch
+    SA_TRANSFORMERS_AVAILABLE = True
+except ImportError:
+    SA_TRANSFORMERS_AVAILABLE = False
+
+# Configure warnings and logging
+warnings.filterwarnings('ignore')
 
 # Set up logging
 base_dir = Path(__file__).parent.parent
@@ -61,12 +74,6 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # Integrated Sentiment Analysis (formerly in sentiment_analysis.py)
 # ---------------------------------------------------------------------------
-try:
-    from transformers import AutoTokenizer, AutoModelForSequenceClassification  # type: ignore
-    import torch  # type: ignore
-    SA_TRANSFORMERS_AVAILABLE = True
-except Exception:
-    SA_TRANSFORMERS_AVAILABLE = False
 
 class MultilinguaSentimentAnalyzer:
     """Lightweight multilingual sentiment analyzer with graceful fallbacks.
