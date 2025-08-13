@@ -835,7 +835,8 @@ class RealDataProcessor:
                             'predicted_success_score': float(location['success_score']),
                             'competitor_count': int(location['competitor_count']),
                             'similar_cuisine_count': int(location['similar_cuisine_count']),
-                            'local_area': location.get('local_area', 'Vancouver'),
+                            'local_area': location.get('neighborhood', 'Vancouver'),
+                            'neighborhood': location.get('neighborhood', 'Central Vancouver'),
                             'recommendation_reason': location['reason'],
                             'confidence': float(location['confidence'])
                         }
@@ -872,38 +873,202 @@ class RealDataProcessor:
     def _find_optimal_locations_for_cuisine(self, restaurant_data: pd.DataFrame, 
                                            cuisine: str, lat_range: np.ndarray, 
                                            lon_range: np.ndarray, top_n: int = 3) -> List[Dict]:
-        """Find optimal locations for a specific cuisine type"""
+        """Find optimal locations for a specific cuisine type using realistic analysis"""
         
-        # Create evaluation grid
         locations = []
+        cuisine_preferences = self._get_cuisine_preferences(cuisine)
         
-        for lat in lat_range:
-            for lon in lon_range:
-                # Calculate features for this potential location
-                location_features = self._calculate_location_features(
-                    lat, lon, restaurant_data, cuisine
-                )
-                
-                # Predict success score (simplified model)
-                success_score = self._predict_location_success(location_features, cuisine)
-                
-                locations.append({
-                    'latitude': float(lat),
-                    'longitude': float(lon),
-                    'success_score': float(success_score),
-                    'competitor_count': int(location_features['competitor_count']),
-                    'similar_cuisine_count': int(location_features['similar_cuisine_count']),
-                    'confidence': float(location_features['confidence']),
-                    'reason': location_features['reason']
-                })
+        # Define distinct Vancouver neighborhoods with realistic coordinates and variations
+        neighborhood_centers = [
+            {"name": "Downtown", "lat": 49.2827, "lon": -123.1207},
+            {"name": "West End", "lat": 49.2915, "lon": -123.1348},
+            {"name": "Yaletown", "lat": 49.2745, "lon": -123.1210},
+            {"name": "Gastown", "lat": 49.2838, "lon": -123.1085},
+            {"name": "Chinatown", "lat": 49.2808, "lon": -123.1025},
+            {"name": "Mount Pleasant", "lat": 49.2622, "lon": -123.1011},
+            {"name": "Commercial Drive", "lat": 49.2650, "lon": -123.0692},
+            {"name": "Kitsilano", "lat": 49.2688, "lon": -123.1533},
+            {"name": "South Granville", "lat": 49.2448, "lon": -123.1365},
+            {"name": "Main Street", "lat": 49.2520, "lon": -123.1003},
+            {"name": "Robson Street", "lat": 49.2842, "lon": -123.1189},
+            {"name": "Davie Village", "lat": 49.2806, "lon": -123.1396},
+            {"name": "Olympic Village", "lat": 49.2667, "lon": -123.1135},
+            {"name": "Coal Harbour", "lat": 49.2906, "lon": -123.1226},
+            {"name": "Fairview", "lat": 49.2591, "lon": -123.1266},
+            {"name": "Riley Park", "lat": 49.2485, "lon": -123.1046},
+            {"name": "Hastings-Sunrise", "lat": 49.2789, "lon": -123.0459},
+            {"name": "Strathcona", "lat": 49.2735, "lon": -123.0893},
+            {"name": "Grandview-Woodland", "lat": 49.2700, "lon": -123.0700},
+            {"name": "Kensington-Cedar Cottage", "lat": 49.2389, "lon": -123.0764}
+        ]
         
-        # Sort by success score and return top locations
+        # Generate candidate locations with much more variation
+        np.random.seed(hash(cuisine) % 1000)  # Different seed per cuisine for variety
+        
+        # Select different neighborhood preferences based on cuisine type
+        cuisine_neighborhood_preferences = {
+            'Italian restaurant': ['Commercial Drive', 'Mount Pleasant', 'Kitsilano'],
+            'Chinese restaurant': ['Chinatown', 'Main Street', 'Richmond'],
+            'Japanese restaurant': ['Robson Street', 'West End', 'Kitsilano'],
+            'Thai restaurant': ['Commercial Drive', 'Main Street', 'Fairview'],
+            'Indian restaurant': ['Main Street', 'Commercial Drive', 'Sunset'],
+            'French restaurant': ['Yaletown', 'Gastown', 'South Granville'],
+            'Korean restaurant': ['Robson Street', 'West End', 'Burnaby'],
+            'Vietnamese restaurant': ['Commercial Drive', 'Main Street', 'Kingsway'],
+            'Mexican restaurant': ['Commercial Drive', 'Kitsilano', 'Mount Pleasant'],
+            'Fine dining restaurant': ['Yaletown', 'West End', 'Coal Harbour'],
+            'Middle Eastern restaurant': ['Commercial Drive', 'Main Street', 'North Van'],
+            'Breakfast restaurant': ['Kitsilano', 'Mount Pleasant', 'Commercial Drive']
+        }
+        
+        preferred_neighborhoods = cuisine_neighborhood_preferences.get(cuisine, 
+            ['Downtown', 'Commercial Drive', 'Main Street'])
+        
+        # Filter neighborhoods to preferred ones, with fallback to all
+        available_neighborhoods = [n for n in neighborhood_centers 
+                                 if n['name'] in preferred_neighborhoods]
+        if not available_neighborhoods:
+            available_neighborhoods = neighborhood_centers[:10]  # Use first 10 as fallback
+        
+        # Create multiple candidate locations with significant geographic spread
+        for i, neighborhood in enumerate(available_neighborhoods[:6]):  # Max 6 neighborhoods per cuisine
+            # Create multiple candidates per neighborhood with wider spread
+            for j in range(3):  # 3 candidates per neighborhood
+                # Add significant random variation around neighborhood center
+                lat_offset = (np.random.random() - 0.5) * 0.025  # ±0.0125 degrees (~1.4km)
+                lon_offset = (np.random.random() - 0.5) * 0.025
+                
+                candidate_lat = neighborhood["lat"] + lat_offset
+                candidate_lon = neighborhood["lon"] + lon_offset
+                
+                # Ensure location is valid
+                if self._is_valid_vancouver_location(candidate_lat, candidate_lon):
+                    # Calculate features for this potential location
+                    location_features = self._calculate_location_features(
+                        candidate_lat, candidate_lon, restaurant_data, cuisine
+                    )
+                    
+                    # Predict success score using improved model
+                    success_score = self._predict_location_success(
+                        location_features, cuisine, cuisine_preferences, candidate_lat, candidate_lon
+                    )
+                    
+                    locations.append({
+                        'latitude': float(candidate_lat),
+                        'longitude': float(candidate_lon),
+                        'success_score': float(success_score),
+                        'competitor_count': int(location_features['competitor_count']),
+                        'similar_cuisine_count': int(location_features['similar_cuisine_count']),
+                        'confidence': float(location_features['confidence']),
+                        'reason': location_features['reason'],
+                        'neighborhood': neighborhood["name"]
+                    })
+        
+        # Sort by success score and return top locations with geographic diversity
         locations.sort(key=lambda x: x['success_score'], reverse=True)
-        return locations[:top_n]
+        
+        # Ensure geographic diversity in recommendations
+        diverse_locations = self._ensure_geographic_diversity(locations, top_n)
+        return diverse_locations
+    
+    def _get_cuisine_preferences(self, cuisine: str) -> Dict:
+        """Get cuisine-specific preferences for location scoring"""
+        preferences = {
+            'Italian restaurant': {'prefers_downtown': 0.7, 'competition_tolerance': 0.6},
+            'Chinese restaurant': {'prefers_downtown': 0.8, 'competition_tolerance': 0.8},
+            'Japanese restaurant': {'prefers_downtown': 0.6, 'competition_tolerance': 0.5},
+            'Thai restaurant': {'prefers_downtown': 0.5, 'competition_tolerance': 0.6},
+            'Mexican restaurant': {'prefers_downtown': 0.4, 'competition_tolerance': 0.7},
+            'Indian restaurant': {'prefers_downtown': 0.6, 'competition_tolerance': 0.7},
+            'Korean restaurant': {'prefers_downtown': 0.7, 'competition_tolerance': 0.5},
+            'Vietnamese restaurant': {'prefers_downtown': 0.5, 'competition_tolerance': 0.8},
+            'Fine dining restaurant': {'prefers_downtown': 0.9, 'competition_tolerance': 0.3},
+            'Breakfast restaurant': {'prefers_downtown': 0.3, 'competition_tolerance': 0.9},
+        }
+        return preferences.get(cuisine, {'prefers_downtown': 0.5, 'competition_tolerance': 0.6})
+    
+    def _is_valid_vancouver_location(self, lat: float, lon: float) -> bool:
+        """Check if location is within reasonable Vancouver bounds"""
+        return (49.2 <= lat <= 49.3 and -123.25 <= lon <= -123.0)
+    
+    def _get_neighborhood_name(self, lat: float, lon: float) -> str:
+        """Get approximate neighborhood name based on coordinates"""
+        if lat > 49.27 and lon > -123.1:
+            return "North Vancouver"
+        elif lat > 49.26 and lon < -123.15:
+            return "West End"
+        elif lat > 49.25 and -123.15 <= lon <= -123.1:
+            return "Downtown"
+        elif lat < 49.24:
+            return "South Vancouver"
+        elif lon < -123.18:
+            return "West Vancouver"
+        else:
+            return "Central Vancouver"
+    
+    def _ensure_geographic_diversity(self, locations: List[Dict], top_n: int) -> List[Dict]:
+        """Ensure geographic diversity in top recommendations with much larger separation"""
+        if len(locations) <= top_n:
+            return locations
+        
+        diverse_locations = []
+        min_distance = 0.04  # Much larger minimum distance (~4km) for true geographic diversity
+        
+        # Always include the top-scoring location
+        if locations:
+            diverse_locations.append(locations[0])
+        
+        # Find geographically diverse locations from remaining candidates
+        for location in locations[1:]:
+            if len(diverse_locations) >= top_n:
+                break
+                
+            # Check if this location is far enough from existing recommendations
+            is_diverse = True
+            for existing in diverse_locations:
+                distance = np.sqrt(
+                    (location['latitude'] - existing['latitude'])**2 + 
+                    (location['longitude'] - existing['longitude'])**2
+                )
+                if distance < min_distance:
+                    is_diverse = False
+                    break
+            
+            if is_diverse:
+                diverse_locations.append(location)
+        
+        # If we still need more locations, gradually relax distance requirement
+        # but ensure we still have meaningful geographic spread
+        fallback_distances = [0.03, 0.02, 0.015]  # Progressively smaller distances
+        
+        for fallback_distance in fallback_distances:
+            if len(diverse_locations) >= top_n:
+                break
+                
+            for location in locations:
+                if len(diverse_locations) >= top_n:
+                    break
+                if location in diverse_locations:
+                    continue
+                    
+                is_diverse = True
+                for existing in diverse_locations:
+                    distance = np.sqrt(
+                        (location['latitude'] - existing['latitude'])**2 + 
+                        (location['longitude'] - existing['longitude'])**2
+                    )
+                    if distance < fallback_distance:
+                        is_diverse = False
+                        break
+                
+                if is_diverse:
+                    diverse_locations.append(location)
+        
+        return diverse_locations[:top_n]
     
     def _calculate_location_features(self, lat: float, lon: float, 
                                    restaurant_data: pd.DataFrame, cuisine: str) -> Dict:
-        """Calculate features for a potential restaurant location"""
+        """Calculate realistic features for a potential restaurant location"""
         
         # Count nearby competitors (within 500m)
         distances = np.sqrt(
@@ -914,57 +1079,110 @@ class RealDataProcessor:
         nearby_mask = distances <= 500
         competitor_count = nearby_mask.sum()
         
-        # Estimate similar cuisine competition (simplified)
-        similar_cuisine_count = max(0, competitor_count // 3)  # Assume 1/3 similar cuisine
-        
-        # Calculate confidence based on data density
-        confidence = min(1.0, competitor_count / 20)  # Higher confidence with more data points
-        
-        # Generate reasoning
-        if competitor_count < 5:
-            reason = f"Low competition area for {cuisine} - opportunity for market entry"
-        elif competitor_count > 50:
-            reason = f"High-traffic area for {cuisine} - established dining district"
+        # Estimate similar cuisine competition more realistically
+        # Use actual cuisine data if available, otherwise estimate
+        if 'primary_category' in restaurant_data.columns:
+            cuisine_keywords = cuisine.lower().split()
+            similar_mask = restaurant_data['primary_category'].str.lower().str.contains(
+                '|'.join(cuisine_keywords[:2]), na=False
+            )
+            similar_cuisine_count = (nearby_mask & similar_mask).sum()
         else:
-            reason = f"Moderate competition for {cuisine} - balanced market opportunity"
+            # Fallback: estimate based on cuisine popularity
+            cuisine_popularity = {
+                'chinese': 0.15, 'italian': 0.12, 'japanese': 0.10, 'indian': 0.08,
+                'thai': 0.06, 'mexican': 0.05, 'korean': 0.04, 'vietnamese': 0.04
+            }
+            cuisine_key = next((k for k in cuisine_popularity.keys() if k in cuisine.lower()), 'other')
+            popularity = cuisine_popularity.get(cuisine_key, 0.03)
+            similar_cuisine_count = int(competitor_count * popularity)
+        
+        # Calculate confidence based on data density and location
+        confidence = min(1.0, competitor_count / 30)  # More realistic confidence scaling
+        
+        # Calculate distance from downtown Vancouver
+        downtown_lat, downtown_lon = 49.2827, -123.1207
+        distance_from_downtown = np.sqrt(
+            (lat - downtown_lat)**2 + (lon - downtown_lon)**2
+        ) * 111000  # meters
+        
+        # Generate more nuanced reasoning
+        if competitor_count < 3:
+            reason = f"Emerging area for {cuisine} - first-mover advantage but unproven market"
+        elif competitor_count < 10:
+            reason = f"Growing market for {cuisine} - good opportunity with manageable competition"
+        elif competitor_count < 25:
+            reason = f"Established {cuisine} scene - proven market with moderate competition"
+        elif competitor_count < 50:
+            reason = f"Competitive {cuisine} market - high foot traffic but need strong differentiation"
+        else:
+            reason = f"Saturated {cuisine} market - very competitive, requires unique positioning"
         
         return {
             'competitor_count': int(competitor_count),
             'similar_cuisine_count': int(similar_cuisine_count),
+            'distance_from_downtown': float(distance_from_downtown),
             'confidence': float(confidence),
             'reason': reason
         }
     
-    def _predict_location_success(self, features: Dict, cuisine: str) -> float:
-        """Predict success score for a location (simplified model)"""
+    def _predict_location_success(self, features: Dict, cuisine: str, 
+                                preferences: Dict, lat: float, lon: float) -> float:
+        """Predict success score using improved location-based model"""
         
-        # Baseline success score
-        base_score = 0.6
+        # Baseline success score varies by cuisine type
+        base_scores = {
+            'Italian restaurant': 0.65, 'Chinese restaurant': 0.70, 'Japanese restaurant': 0.68,
+            'Thai restaurant': 0.64, 'Mexican restaurant': 0.62, 'Indian restaurant': 0.66,
+            'Korean restaurant': 0.63, 'Vietnamese restaurant': 0.61, 'Fine dining restaurant': 0.72,
+            'Breakfast restaurant': 0.58, 'Fast food': 0.55
+        }
         
-        # Adjust based on competition
-        competition_factor = features['competitor_count']
-        if competition_factor < 10:
-            # Low competition - good for unique cuisines
-            competition_adjustment = 0.1
-        elif competition_factor > 40:
-            # High competition - good for popular areas but harder to stand out
-            competition_adjustment = -0.05
+        cuisine_key = next((k for k in base_scores.keys() if k in cuisine), 'other')
+        base_score = base_scores.get(cuisine_key, 0.60)
+        
+        # Competition adjustment (realistic S-curve)
+        competition_count = features['competitor_count']
+        if competition_count < 5:
+            competition_adj = -0.05  # Too little competition might indicate poor location
+        elif competition_count < 15:
+            competition_adj = 0.08   # Sweet spot - proven market, manageable competition
+        elif competition_count < 30:
+            competition_adj = 0.03   # Competitive but viable
+        elif competition_count < 50:
+            competition_adj = -0.02  # Very competitive
         else:
-            # Moderate competition - balanced
-            competition_adjustment = 0.05
+            competition_adj = -0.08  # Oversaturated
         
-        # Adjust based on cuisine popularity (simplified)
-        popular_cuisines = ['Italian restaurant', 'Chinese restaurant', 'Japanese restaurant', 
-                          'Indian restaurant', 'Mexican restaurant']
+        # Distance from downtown adjustment
+        distance_km = features['distance_from_downtown'] / 1000
+        downtown_preference = preferences['prefers_downtown']
+        if distance_km < 2:  # Downtown core
+            distance_adj = 0.05 * downtown_preference
+        elif distance_km < 5:  # Near downtown
+            distance_adj = 0.02 * downtown_preference
+        elif distance_km < 10:  # Suburban
+            distance_adj = -0.02 * downtown_preference
+        else:  # Far suburbs
+            distance_adj = -0.05 * downtown_preference
         
-        if cuisine in popular_cuisines:
-            cuisine_adjustment = 0.05  # Popular cuisines have slight advantage
-        else:
-            cuisine_adjustment = 0.02  # Unique cuisines in right location
+        # Similar cuisine density adjustment
+        similar_ratio = features['similar_cuisine_count'] / max(1, competition_count)
+        if similar_ratio > 0.3:  # High concentration of similar cuisine
+            similar_adj = -0.03
+        elif similar_ratio > 0.1:  # Some similar cuisine
+            similar_adj = 0.01
+        else:  # Few similar cuisine
+            similar_adj = 0.02
+        
+        # Add some randomness for variety but keep it realistic
+        random_factor = (np.random.random() - 0.5) * 0.04  # ±2% variation
         
         # Calculate final score
-        success_score = base_score + competition_adjustment + cuisine_adjustment
-        return max(0.1, min(1.0, success_score))  # Clamp between 0.1 and 1.0
+        final_score = base_score + competition_adj + distance_adj + similar_adj + random_factor
+        
+        # Ensure score is within reasonable bounds
+        return max(0.3, min(0.9, final_score))
     
     def _create_recommendation_summary(self, cuisine_types: List[str], recommendations: List[Dict]):
         """Create a summary report of recommendations"""

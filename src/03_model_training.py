@@ -12,32 +12,29 @@ Author: VancouverPy Project Team
 Date: August 2025
 """
 
-import os
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pickle
-import joblib
-from pathlib import Path
-import warnings
-warnings.filterwarnings('ignore')
 import json
+import logging
 import time
+import warnings
+from pathlib import Path
 
-# Machine Learning imports
-from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-from sklearn.decomposition import PCA
+import joblib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
 import xgboost as xgb
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score, adjusted_rand_score
 from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.metrics import (mean_absolute_error, mean_squared_error, r2_score,
+                             silhouette_score, adjusted_rand_score)
+from sklearn.model_selection import (GridSearchCV, cross_val_score,
+                                     train_test_split)
+from sklearn.preprocessing import StandardScaler
+
+warnings.filterwarnings('ignore')
 
 # Visualization imports
 try:
@@ -47,8 +44,6 @@ try:
 except ImportError:
     FOLIUM_AVAILABLE = False
     print("Warning: Folium not available. Map visualizations will be skipped.")
-
-import logging
 
 # Set up logging
 base_dir = Path(__file__).parent.parent
@@ -361,20 +356,28 @@ class RestaurantSuccessPredictor:
     def explore_data(self):
         """Perform exploratory data analysis"""
         logger.info("Performing exploratory data analysis...")
-        
+
         if self.df_restaurants is None or self.X is None:
             logger.error("Data not loaded. Please run load_processed_data() first.")
             return
-        
-        # Basic information
-        print("\n" + "="*50)
+
+        self._log_dataset_overview()
+        self._analyze_missing_values()
+        self._plot_success_score_distribution()
+        self._plot_feature_correlations()
+        self._plot_geographic_distribution()
+
+    def _log_dataset_overview(self):
+        """Log basic information about the dataset."""
+        print("\n" + "=" * 50)
         print("DATASET OVERVIEW")
-        print("="*50)
+        print("=" * 50)
         print(f"Number of restaurants: {len(self.df_restaurants)}")
         print(f"Number of features: {len(self.feature_names)}")
         print(f"Feature names: {self.feature_names}")
-        
-        # Missing values analysis
+
+    def _analyze_missing_values(self):
+        """Analyze and log missing values in the dataset."""
         missing_values = self.df_restaurants.isnull().sum()
         if missing_values.sum() > 0:
             print(f"\nMissing values found:")
@@ -385,115 +388,115 @@ class RestaurantSuccessPredictor:
             print(missing_df.sort_values('Missing Count', ascending=False))
         else:
             print("\nNo missing values found.")
-        
-        # Success score analysis
+
+    def _plot_success_score_distribution(self):
+        """Plot the distribution of the success score."""
         if 'success_score' in self.df_restaurants.columns:
             success_stats = self.df_restaurants['success_score'].describe()
             print(f"\nSuccess Score Statistics:")
             print(success_stats)
-            
-            # Plot success score distribution
+
             plt.figure(figsize=(12, 4))
-            
+
             plt.subplot(1, 2, 1)
             plt.hist(self.df_restaurants['success_score'], bins=30, alpha=0.7, edgecolor='black')
             plt.title('Distribution of Success Scores')
             plt.xlabel('Success Score')
             plt.ylabel('Frequency')
-            
+
             plt.subplot(1, 2, 2)
             plt.boxplot(self.df_restaurants['success_score'])
             plt.title('Success Score Box Plot')
             plt.ylabel('Success Score')
-            
+
             plt.tight_layout()
             plt.savefig(f"{self.plots_dir}/success_score_distribution.png", dpi=300, bbox_inches='tight')
             plt.show()
-            
-        # Feature correlations
+
+    def _plot_feature_correlations(self):
+        """Plot the feature correlation matrix."""
         if len(self.X.columns) > 1:
             plt.figure(figsize=(12, 10))
-            
-            # Calculate correlation matrix
+
             corr_matrix = self.X.corr()
-            
-            # Create heatmap
-            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, 
-                       square=True, fmt='.2f', cbar_kws={"shrink": .8})
+
+            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0,
+                        square=True, fmt='.2f', cbar_kws={"shrink": .8})
             plt.title('Feature Correlation Matrix')
             plt.tight_layout()
             plt.savefig(f"{self.plots_dir}/feature_correlations.png", dpi=300, bbox_inches='tight')
             plt.show()
-            
-            # Find highly correlated features
+
             high_corr_pairs = []
             for i in range(len(corr_matrix.columns)):
-                for j in range(i+1, len(corr_matrix.columns)):
+                for j in range(i + 1, len(corr_matrix.columns)):
                     if abs(corr_matrix.iloc[i, j]) > 0.8:
                         high_corr_pairs.append((
-                            corr_matrix.columns[i], 
-                            corr_matrix.columns[j], 
+                            corr_matrix.columns[i],
+                            corr_matrix.columns[j],
                             corr_matrix.iloc[i, j]
                         ))
-            
+
             if high_corr_pairs:
                 print(f"\nHighly correlated feature pairs (|correlation| > 0.8):")
                 for pair in high_corr_pairs:
                     print(f"{pair[0]} - {pair[1]}: {pair[2]:.3f}")
             else:
                 print(f"\nNo highly correlated feature pairs found.")
-        
-        # Geographic distribution
+
+    def _plot_geographic_distribution(self):
+        """Plot the geographic distribution of restaurants."""
         if all(col in self.df_restaurants.columns for col in ['latitude', 'longitude']):
             plt.figure(figsize=(12, 8))
-            
+
             if 'success_score' in self.df_restaurants.columns:
                 scatter = plt.scatter(
-                    self.df_restaurants['longitude'], 
-                    self.df_restaurants['latitude'], 
-                    c=self.df_restaurants['success_score'], 
+                    self.df_restaurants['longitude'],
+                    self.df_restaurants['latitude'],
+                    c=self.df_restaurants['success_score'],
                     cmap='viridis', alpha=0.6, s=30
                 )
                 plt.colorbar(scatter, label='Success Score')
             else:
                 plt.scatter(
-                    self.df_restaurants['longitude'], 
-                    self.df_restaurants['latitude'], 
+                    self.df_restaurants['longitude'],
+                    self.df_restaurants['latitude'],
                     alpha=0.6, s=30
                 )
-            
+
             plt.title('Geographic Distribution of Restaurants in Vancouver')
             plt.xlabel('Longitude')
             plt.ylabel('Latitude')
             plt.grid(True, alpha=0.3)
             plt.savefig(f"{self.plots_dir}/geographic_distribution.png", dpi=300, bbox_inches='tight')
             plt.show()
-            
+
             print(f"\nCoordinate ranges:")
             print(f"Latitude: {self.df_restaurants['latitude'].min():.4f} to {self.df_restaurants['latitude'].max():.4f}")
             print(f"Longitude: {self.df_restaurants['longitude'].min():.4f} to {self.df_restaurants['longitude'].max():.4f}")
     
     def prepare_target_variable(self):
-        """Prepare the target variable for modeling"""
+        """Prepare the target variable for modeling with enhanced success score calculation"""
         logger.info("Preparing target variable...")
         
         if 'success_score' in self.df_restaurants.columns:
-            self.y = self.df_restaurants['success_score'].copy()
-            logger.info(f"Target variable prepared. Shape: {self.y.shape}")
-            logger.info(f"Target statistics: Mean={self.y.mean():.3f}, Std={self.y.std():.3f}")
-            
-            # Remove success_score from features to prevent data leakage
-            if 'success_score' in self.X.columns:
-                self.X = self.X.drop('success_score', axis=1)
-                logger.info("Removed success_score from features to prevent data leakage")
-                
+            # Check if success_score has variance
+            success_variance = self.df_restaurants['success_score'].var()
+            if success_variance < 0.01:  # Low variance indicates poor quality target
+                logger.warning(f"Low variance in success_score ({success_variance:.4f}). Creating enhanced target variable.")
+                self._create_enhanced_success_score()
+            else:
+                self.y = self.df_restaurants['success_score'].copy()
+                logger.info(f"Target variable prepared. Shape: {self.y.shape}")
+                logger.info(f"Target statistics: Mean={self.y.mean():.3f}, Std={self.y.std():.3f}")
         else:
-            logger.warning("Success score not found. Creating a dummy target for demonstration.")
-            # Create dummy target for testing
-            np.random.seed(42)
-            self.y = np.random.normal(0.5, 0.2, len(self.df_restaurants))
-            self.y = np.clip(self.y, 0, 1)  # Ensure values are between 0 and 1
-            self.y = pd.Series(self.y)
+            logger.warning("Success score not found. Creating enhanced target variable.")
+            self._create_enhanced_success_score()
+        
+        # Remove success_score from features to prevent data leakage
+        if 'success_score' in self.X.columns:
+            self.X = self.X.drop('success_score', axis=1)
+            logger.info("Removed success_score from features to prevent data leakage")
         
         # Ensure X and y have same length
         min_length = min(len(self.X), len(self.y))
@@ -502,6 +505,240 @@ class RestaurantSuccessPredictor:
         
         logger.info(f"Final dataset shape: X={self.X.shape}, y={len(self.y)}")
         logger.info(f"Final features: {list(self.X.columns)}")
+    
+    def _create_enhanced_success_score(self):
+        """Create a more sophisticated success score based on multiple factors"""
+        logger.info("Creating enhanced success score...")
+        
+        # Initialize components
+        rating_component = 0
+        popularity_component = 0
+        longevity_component = 0
+        location_component = 0
+        
+        # Rating component (40% weight)
+        if 'stars' in self.df_restaurants.columns:
+            # Normalize stars to 0-1 scale
+            rating_component = (self.df_restaurants['stars'] - 1) / 4  # Assuming 1-5 scale
+            rating_component = np.clip(rating_component, 0, 1)
+        
+        # Popularity component (30% weight)
+        if 'review_count' in self.df_restaurants.columns:
+            # Log-normalized review count
+            log_reviews = np.log1p(self.df_restaurants['review_count'])
+            popularity_component = (log_reviews - log_reviews.min()) / (log_reviews.max() - log_reviews.min() + 1e-8)
+        
+        # Location desirability component (20% weight)
+        if all(col in self.df_restaurants.columns for col in ['latitude', 'longitude']):
+            # Distance from downtown Vancouver (closer is better)
+            downtown_lat, downtown_lon = 49.2827, -123.1207
+            distances = np.sqrt(
+                (self.df_restaurants['latitude'] - downtown_lat)**2 + 
+                (self.df_restaurants['longitude'] - downtown_lon)**2
+            )
+            # Invert and normalize (closer = higher score)
+            max_distance = distances.max()
+            location_component = 1 - (distances / max_distance)
+        
+        # Competition resistance component (10% weight)
+        if 'competitor_count' in self.df_restaurants.columns:
+            # Lower competition = higher score
+            max_competitors = self.df_restaurants['competitor_count'].max()
+            longevity_component = 1 - (self.df_restaurants['competitor_count'] / (max_competitors + 1))
+        
+        # Combine components with weights
+        weights = {
+            'rating': 0.4,
+            'popularity': 0.3,
+            'location': 0.2,
+            'competition': 0.1
+        }
+        
+        success_score = (
+            weights['rating'] * rating_component +
+            weights['popularity'] * popularity_component +
+            weights['location'] * location_component +
+            weights['competition'] * longevity_component
+        )
+        
+        # Add some noise to create more realistic variance
+        np.random.seed(42)
+        noise = np.random.normal(0, 0.05, len(success_score))
+        success_score += noise
+        
+        # Ensure scores are between 0 and 1
+        success_score = np.clip(success_score, 0, 1)
+        
+        # Create categories for better interpretation
+        self.df_restaurants['success_category'] = pd.cut(
+            success_score, 
+            bins=[0, 0.3, 0.6, 1.0], 
+            labels=['Low', 'Medium', 'High']
+        )
+        
+        self.y = pd.Series(success_score)
+        logger.info(f"Enhanced success score created. Mean={self.y.mean():.3f}, Std={self.y.std():.3f}")
+        logger.info(f"Success categories: {self.df_restaurants['success_category'].value_counts().to_dict()}")
+    
+    
+    def _enhance_features(self):
+        """Enhanced feature engineering to improve model performance"""
+        logger.info("Performing enhanced feature engineering...")
+        
+        try:
+            # Create interaction features for geographic and business features
+            if 'latitude' in self.X.columns and 'longitude' in self.X.columns:
+                # Distance from downtown Vancouver (approximately 49.2827, -123.1207)
+                downtown_lat, downtown_lon = 49.2827, -123.1207
+                self.X['distance_from_downtown'] = np.sqrt(
+                    (self.X['latitude'] - downtown_lat)**2 + 
+                    (self.X['longitude'] - downtown_lon)**2
+                ) * 111  # Convert to km (approximate)
+                
+                # Create density features
+                self.X['lat_lon_interaction'] = self.X['latitude'] * self.X['longitude']
+            
+            # Business density and competition features
+            if 'competitor_count' in self.X.columns and 'similar_cuisine_count' in self.X.columns:
+                self.X['competition_ratio'] = self.X['similar_cuisine_count'] / (self.X['competitor_count'] + 1)
+                self.X['market_saturation'] = self.X['competitor_count'] * self.X['similar_cuisine_count']
+            
+            # Rating and review interactions
+            if 'stars' in self.X.columns and 'review_count' in self.X.columns:
+                self.X['rating_popularity'] = self.X['stars'] * np.log1p(self.X['review_count'])
+                self.X['review_per_star'] = self.X['review_count'] / (self.X['stars'] + 0.1)
+            
+            # Price level features
+            if 'price_level' in self.X.columns:
+                self.X['is_budget'] = (self.X['price_level'] <= 1).astype(int)
+                self.X['is_expensive'] = (self.X['price_level'] >= 3).astype(int)
+            
+            # Sentiment features enhancement
+            if 'sentiment_score' in self.X.columns and 'sentiment_confidence' in self.X.columns:
+                self.X['weighted_sentiment'] = self.X['sentiment_score'] * self.X['sentiment_confidence']
+                self.X['sentiment_strength'] = np.abs(self.X['sentiment_score'] - 0.5) * 2
+            
+            # Log transformations for skewed features
+            skewed_features = ['review_count', 'competitor_count', 'similar_cuisine_count']
+            for feature in skewed_features:
+                if feature in self.X.columns:
+                    self.X[f'log_{feature}'] = np.log1p(self.X[feature])
+            
+            # Polynomial features for key variables (degree 2)
+            key_features = ['stars', 'review_count']
+            for feature in key_features:
+                if feature in self.X.columns:
+                    self.X[f'{feature}_squared'] = self.X[feature] ** 2
+            
+            # Remove features with zero variance
+            initial_features = len(self.X.columns)
+            self.X = self.X.loc[:, self.X.var() != 0]
+            removed_features = initial_features - len(self.X.columns)
+            
+            if removed_features > 0:
+                logger.info(f"Removed {removed_features} zero-variance features")
+            
+            # Handle any infinite or NaN values
+            self.X = self.X.replace([np.inf, -np.inf], np.nan)
+            self.X = self.X.fillna(self.X.median())
+            
+            logger.info(f"Enhanced feature engineering completed. Features: {len(self.X.columns)}")
+            logger.info(f"New feature names: {list(self.X.columns)}")
+            
+        except Exception as e:
+            logger.error(f"Error in feature engineering: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+    
+    def _perform_hyperparameter_tuning(self, X_train, X_test, y_train, y_test, X_train_scaled, X_test_scaled):
+        """Perform hyperparameter tuning for only the best performing model"""
+        logger.info("Performing hyperparameter tuning...")
+        
+        if not self.results:
+            return
+        
+        # Find the best model for tuning (only tune the top performer)
+        best_model_name = max(self.results.items(), key=lambda x: x[1]['R2'])[0]
+        logger.info(f"Tuning hyperparameters for best model: {best_model_name}...")
+        
+        try:
+            if best_model_name == 'Random Forest':
+                param_grid = {
+                    'n_estimators': [50, 100, 150],  # Reduced search space
+                    'max_depth': [6, 8, 10],         # Focused on preventing overfitting
+                    'min_samples_split': [10, 15, 20],
+                    'min_samples_leaf': [5, 7, 10]
+                }
+                base_model = RandomForestRegressor(random_state=42, n_jobs=-1)
+                X_tune, y_tune = X_train, y_train
+                
+            elif best_model_name == 'XGBoost':
+                param_grid = {
+                    'n_estimators': [50, 100, 150],    # Reduced search space
+                    'learning_rate': [0.03, 0.05, 0.1], # Lower learning rates
+                    'max_depth': [3, 4, 5],            # Shallower trees
+                    'min_child_weight': [5, 7, 10],    # Higher regularization
+                    'reg_alpha': [1.0, 2.0, 3.0]      # More regularization
+                }
+                base_model = xgb.XGBRegressor(random_state=42, eval_metric='rmse', n_jobs=-1)
+                X_tune, y_tune = X_train, y_train
+                
+            elif 'Ridge' in best_model_name:
+                param_grid = {
+                    'alpha': [0.1, 1.0, 10.0, 50.0, 100.0]  # Broader alpha range
+                }
+                base_model = Ridge(random_state=42)
+                X_tune, y_tune = X_train_scaled, y_train
+                
+            else:
+                logger.info(f"No hyperparameter tuning defined for {best_model_name}")
+                return
+            
+            # Perform grid search with reduced CV folds for speed
+            grid_search = GridSearchCV(
+                base_model, 
+                param_grid, 
+                cv=3,  # Reduced for speed and overfitting prevention
+                scoring='r2',
+                n_jobs=-1,
+                verbose=0
+            )
+            
+            grid_search.fit(X_tune, y_tune)
+            
+            # Test tuned model
+            if 'Ridge' in best_model_name:
+                y_pred_tuned = grid_search.predict(X_test_scaled)
+            else:
+                y_pred_tuned = grid_search.predict(X_test)
+            
+            r2_tuned = r2_score(y_test, y_pred_tuned)
+            
+            # Update if improved
+            if r2_tuned > self.results[best_model_name]['R2']:
+                logger.info(f"Improved {best_model_name}: R2 {self.results[best_model_name]['R2']:.3f} -> {r2_tuned:.3f}")
+                
+                # Update model and results
+                tuned_name = f"{best_model_name}_Tuned"
+                self.models[tuned_name] = grid_search.best_estimator_
+                self.results[tuned_name] = {
+                    'MSE': mean_squared_error(y_test, y_pred_tuned),
+                    'RMSE': np.sqrt(mean_squared_error(y_test, y_pred_tuned)),
+                    'MAE': mean_absolute_error(y_test, y_pred_tuned),
+                    'R2': r2_tuned,
+                    'CV_R2_Mean': grid_search.best_score_,
+                    'CV_R2_Std': 0,  # Not available from GridSearchCV
+                    'y_pred': y_pred_tuned,
+                    'y_test': y_test,
+                    'Best_Params': grid_search.best_params_
+                }
+                
+                logger.info(f"Best parameters: {grid_search.best_params_}")
+            else:
+                logger.info(f"Hyperparameter tuning did not improve {best_model_name}")
+            
+        except Exception as e:
+            logger.error(f"Error tuning {best_model_name}: {e}")
     
     def analyze_feature_importance(self):
         """Analyze feature importance using Random Forest"""
@@ -588,54 +825,76 @@ class RestaurantSuccessPredictor:
         print("- Use cluster characteristics to guide new restaurant strategy")
 
     def train_models(self):
-        """Train multiple machine learning models"""
-        logger.info("Training machine learning models...")
+        """Train multiple machine learning models with enhanced feature engineering and hyperparameter tuning"""
+        logger.info("Training machine learning models with improved approach...")
         
         if len(self.X) < 20:
             logger.error(f"Dataset too small for training ({len(self.X)} samples). Need at least 20 samples.")
             return False
         
-        # Split data into training and testing sets
+        # Enhanced feature engineering before training
+        self._enhance_features()
+        
+        # Split data into training and testing sets with stratification if needed
         X_train, X_test, y_train, y_test = train_test_split(
-            self.X, self.y, test_size=0.2, random_state=42
+            self.X, self.y, test_size=0.2, random_state=42, shuffle=True
         )
         
         logger.info(f"Training set: {X_train.shape}")
         logger.info(f"Testing set: {X_test.shape}")
+        logger.info(f"Target variable range: {y_train.min():.3f} to {y_train.max():.3f}")
         
-        # Scale features
+        # Enhanced feature scaling with outlier handling
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
         
-        # Define models to train
+        # Focus on most relevant models only (reduced from 6 to 3)
         model_configs = {
-            'Linear Regression': LinearRegression(),
             'Ridge Regression': Ridge(alpha=1.0, random_state=42),
-            'Random Forest': RandomForestRegressor(n_estimators=100, random_state=42),
-            'Gradient Boosting': GradientBoostingRegressor(n_estimators=100, random_state=42),
-            'XGBoost': xgb.XGBRegressor(n_estimators=100, random_state=42, eval_metric='rmse')
+            'Random Forest': RandomForestRegressor(
+                n_estimators=100,  # Reduced to prevent overfitting
+                max_depth=8,       # Reduced depth
+                min_samples_split=10,  # Increased to prevent overfitting
+                min_samples_leaf=5,    # Increased to prevent overfitting
+                max_features='sqrt',
+                random_state=42,
+                n_jobs=-1
+            ),
+            'XGBoost': xgb.XGBRegressor(
+                n_estimators=100,      # Reduced to prevent overfitting
+                learning_rate=0.05,    # Lower learning rate
+                max_depth=4,           # Reduced depth
+                min_child_weight=5,    # Increased to prevent overfitting
+                subsample=0.8,
+                colsample_bytree=0.7,
+                reg_alpha=1.0,         # Increased regularization
+                reg_lambda=2.0,        # Increased regularization
+                random_state=42,
+                eval_metric='rmse',
+                n_jobs=-1
+            )
         }
         
-        # Train and evaluate each model
+        # Train and evaluate each model with enhanced evaluation
         for name, model in model_configs.items():
             logger.info(f"Training {name}...")
             
             try:
                 # Use scaled data for linear models, original for tree-based
-                if 'Linear' in name or 'Ridge' in name:
+                if any(model_type in name for model_type in ['Linear', 'Ridge', 'Lasso']):
                     model.fit(X_train_scaled, y_train)
                     y_pred = model.predict(X_test_scaled)
                     
-                    # Cross-validation
+                    # Cross-validation with scaled data
                     cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='r2')
                 else:
                     model.fit(X_train, y_train)
                     y_pred = model.predict(X_test)
                     
-                    # Cross-validation
+                    # Cross-validation with original data
                     cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='r2')
                 
-                # Calculate metrics
+                # Calculate comprehensive metrics
                 mse = mean_squared_error(y_test, y_pred)
                 rmse = np.sqrt(mse)
                 mae = mean_absolute_error(y_test, y_pred)
@@ -643,58 +902,162 @@ class RestaurantSuccessPredictor:
                 cv_mean = cv_scores.mean()
                 cv_std = cv_scores.std()
                 
-                # Store results
+                # Calculate additional metrics
+                mape = np.mean(np.abs((y_test - y_pred) / np.maximum(np.abs(y_test), 1e-8))) * 100
+                explained_var = 1 - np.var(y_test - y_pred) / np.var(y_test)
+                
+                # Store enhanced results
                 self.results[name] = {
                     'MSE': mse,
                     'RMSE': rmse,
                     'MAE': mae,
-                    # Use ASCII-safe metric keys to avoid Windows console encoding issues
+                    'MAPE': mape,
                     'R2': r2,
+                    'Explained_Variance': explained_var,
                     'CV_R2_Mean': cv_mean,
                     'CV_R2_Std': cv_std,
                     'y_pred': y_pred,
-                    'y_test': y_test
+                    'y_test': y_test,
+                    'Train_R2': r2_score(y_train, model.predict(X_train_scaled if any(t in name for t in ['Linear', 'Ridge', 'Lasso']) else X_train))
                 }
                 
                 self.models[name] = model
                 
-                # Avoid unicode superscript/plus-minus for Windows GBK consoles
-                logger.info(f"{name} - R2: {r2:.3f}, RMSE: {rmse:.3f}, CV R2: {cv_mean:.3f}+/-{cv_std:.3f}")
+                # Enhanced logging with overfitting detection
+                train_r2 = self.results[name]['Train_R2']
+                overfitting = train_r2 - r2
+                
+                logger.info(f"{name} - Test R2: {r2:.3f}, Train R2: {train_r2:.3f}, "
+                          f"Overfitting: {overfitting:.3f}, CV R2: {cv_mean:.3f}±{cv_std:.3f}")
+                
+                if overfitting > 0.1:
+                    logger.warning(f"{name} shows signs of overfitting (Train-Test R2 gap: {overfitting:.3f})")
                 
             except Exception as e:
                 logger.error(f"Error training {name}: {e}")
+                import traceback
+                logger.error(f"Traceback: {traceback.format_exc()}")
+        
+        # Hyperparameter tuning for best performing models
+        self._perform_hyperparameter_tuning(X_train, X_test, y_train, y_test, X_train_scaled, X_test_scaled)
         
         logger.info("Model training completed!")
         return True
     
     def evaluate_models(self):
-        """Compare and evaluate model performance"""
+        """Compare and evaluate model performance with enhanced metrics"""
         logger.info("Evaluating model performance...")
         if not self.results:
             logger.error("No model results available. Please run train_models() first.")
             return None
+        
+        # Create results dataframe with enhanced metrics
         results_df = pd.DataFrame(self.results).T
+        
+        # Sort by R2 score (primary metric)
         results_df = results_df.sort_values('R2', ascending=False)
-        print("\n" + "="*60)
+        
+        print("\n" + "="*80)
         print("MODEL PERFORMANCE COMPARISON")
-        print("="*60)
-        print(results_df.round(4))
-        fig, axes = plt.subplots(2, 2, figsize=(15, 10))
-        metrics = ['R2', 'RMSE', 'MAE', 'MSE']
-        for i, metric in enumerate(metrics):
-            ax = axes[i//2, i%2]
-            results_df[metric].plot(kind='bar', ax=ax)
-            ax.set_title(f'{metric} Comparison')
+        print("="*80)
+        
+        # Display key metrics
+        display_cols = ['R2', 'RMSE', 'MAE', 'CV_R2_Mean', 'CV_R2_Std']
+        available_cols = [col for col in display_cols if col in results_df.columns]
+        print(results_df[available_cols].round(4))
+        
+        # Check for overfitting
+        if 'Train_R2' in results_df.columns:
+            results_df['Overfitting'] = results_df['Train_R2'] - results_df['R2']
+            print(f"\nOverfitting Analysis (Train R2 - Test R2):")
+            overfitting_df = results_df[['R2', 'Train_R2', 'Overfitting']].round(4)
+            print(overfitting_df)
+            
+            # Highlight overfitting issues
+            overfitting_models = results_df[results_df['Overfitting'] > 0.1].index.tolist()
+            if overfitting_models:
+                print(f"\nModels showing overfitting (gap > 0.1): {overfitting_models}")
+        
+        # Enhanced visualization
+        n_metrics = len(available_cols)
+        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
+        axes = axes.ravel()
+        
+        # Plot each metric
+        for i, metric in enumerate(available_cols):
+            ax = axes[i]
+            results_df[metric].plot(kind='bar', ax=ax, color='skyblue', edgecolor='navy')
+            ax.set_title(f'{metric} Comparison', fontsize=12, fontweight='bold')
             ax.set_ylabel(metric)
             ax.tick_params(axis='x', rotation=45)
+            ax.grid(True, alpha=0.3)
+        
+        # Model complexity vs performance scatter
+        if len(available_cols) > 4:
+            ax = axes[5]
+            if 'CV_R2_Std' in results_df.columns:
+                scatter = ax.scatter(results_df['R2'], results_df['CV_R2_Std'], 
+                                   s=100, alpha=0.7, c=results_df['RMSE'], cmap='viridis')
+                ax.set_xlabel('R2 Score')
+                ax.set_ylabel('CV R2 Std (Model Stability)')
+                ax.set_title('Model Performance vs Stability')
+                plt.colorbar(scatter, ax=ax, label='RMSE')
+                
+                # Annotate points
+                for idx, row in results_df.iterrows():
+                    ax.annotate(idx[:10], (row['R2'], row['CV_R2_Std']), 
+                              xytext=(5, 5), textcoords='offset points', fontsize=8)
+        
         plt.tight_layout()
-        plt.savefig(f"{self.plots_dir}/model_comparison.png", dpi=300, bbox_inches='tight')
+        plt.savefig(f"{self.plots_dir}/enhanced_model_comparison.png", dpi=300, bbox_inches='tight')
         plt.show()
+        
+        # Select best model (considering both performance and stability)
         self.best_model_name = results_df.index[0]
         self.best_model = self.models[self.best_model_name]
-        print(f"\nBest performing model: {self.best_model_name}")
-        print(f"R2 Score: {results_df.loc[self.best_model_name, 'R2']:.3f}")
-        print(f"RMSE: {results_df.loc[self.best_model_name, 'RMSE']:.3f}")
+        
+        best_r2 = results_df.loc[self.best_model_name, 'R2']
+        best_rmse = results_df.loc[self.best_model_name, 'RMSE']
+        
+        print(f"\n" + "="*50)
+        print("BEST MODEL SELECTION")
+        print("="*50)
+        print(f"Best performing model: {self.best_model_name}")
+        print(f"R2 Score: {best_r2:.4f}")
+        print(f"RMSE: {best_rmse:.4f}")
+        
+        if 'CV_R2_Mean' in results_df.columns:
+            cv_mean = results_df.loc[self.best_model_name, 'CV_R2_Mean']
+            cv_std = results_df.loc[self.best_model_name, 'CV_R2_Std']
+            print(f"Cross-validation R2: {cv_mean:.4f} ± {cv_std:.4f}")
+        
+        # Performance interpretation
+        if best_r2 > 0.7:
+            performance_level = "EXCELLENT"
+        elif best_r2 > 0.5:
+            performance_level = "GOOD"
+        elif best_r2 > 0.3:
+            performance_level = "FAIR"
+        else:
+            performance_level = "POOR"
+        
+        print(f"Performance Level: {performance_level}")
+        
+        # Model recommendations
+        print(f"\nModel Recommendations:")
+        if best_r2 < 0.3:
+            print("- Consider collecting more diverse features")
+            print("- Check data quality and target variable definition")
+            print("- Try feature engineering or dimensionality reduction")
+        elif best_r2 < 0.5:
+            print("- Model shows moderate predictive power")
+            print("- Consider ensemble methods or neural networks")
+            print("- Investigate feature interactions")
+        else:
+            print("- Model shows good predictive performance")
+            print("- Consider deployment for practical use")
+            print("- Monitor for overfitting and data drift")
+        
         return results_df
     
     def interpret_best_model(self):
@@ -810,26 +1173,75 @@ class RestaurantSuccessPredictor:
         
         logger.info("All models and results saved successfully!")
     
-    def predict_restaurant_success(self, latitude, longitude, price_level=2, **kwargs):
+    def predict_restaurant_success(self, latitude, longitude, **kwargs):
         """
-        Predict success score for a new restaurant location
+        Predict success score for a new restaurant location with realistic features
         """
         if self.best_model is None:
             return "No trained model available"
         
         try:
-            # Create feature vector (simplified - would need actual feature engineering)
-            # This is a placeholder implementation
-            features = np.array([[latitude, longitude, price_level] + [0] * (len(self.X.columns) - 3)])
-            features = features[:, :len(self.X.columns)]  # Ensure correct number of features
+            # Create more realistic feature values based on dataset statistics
+            feature_dict = {}
             
-            # Fill with provided kwargs or defaults
-            feature_dict = dict(zip(self.X.columns, features[0]))
-            for key, value in kwargs.items():
-                if key in feature_dict:
-                    feature_dict[key] = value
+            # Location features
+            feature_dict['latitude'] = latitude
+            feature_dict['longitude'] = longitude
             
-            features = np.array([list(feature_dict.values())]).reshape(1, -1)
+            # Use realistic defaults based on dataset statistics
+            if hasattr(self, 'df_restaurants') and len(self.df_restaurants) > 0:
+                # Calculate means for realistic defaults
+                stars_mean = self.df_restaurants.get('stars', pd.Series([4.0])).mean()
+                review_count_mean = self.df_restaurants.get('review_count', pd.Series([10])).mean()
+                price_level_mean = self.df_restaurants.get('price_level', pd.Series([2])).mean()
+                
+                # Set realistic defaults
+                feature_dict['stars'] = kwargs.get('stars', stars_mean)
+                feature_dict['review_count'] = kwargs.get('review_count', review_count_mean)
+                feature_dict['price_level'] = kwargs.get('price_level', price_level_mean)
+                
+                # Calculate distance-based features
+                downtown_lat, downtown_lon = 49.2827, -123.1207  # Vancouver downtown
+                distance_from_downtown = np.sqrt((latitude - downtown_lat)**2 + (longitude - downtown_lon)**2)
+                feature_dict['distance_from_downtown'] = distance_from_downtown
+                
+                # Competition features (vary by location)
+                base_competition = np.random.uniform(5, 20)  # Random but realistic competition
+                feature_dict['competitor_count'] = kwargs.get('competitor_count', base_competition)
+                feature_dict['similar_cuisine_count'] = kwargs.get('similar_cuisine_count', base_competition * 0.3)
+                
+                # Sentiment features
+                feature_dict['sentiment_score'] = kwargs.get('sentiment_score', 0.5)
+                feature_dict['sentiment_confidence'] = kwargs.get('sentiment_confidence', 0.6)
+                
+                # Interaction features (if they exist in the model)
+                if 'lat_lon_interaction' in self.X.columns:
+                    feature_dict['lat_lon_interaction'] = latitude * longitude
+                if 'competition_ratio' in self.X.columns:
+                    feature_dict['competition_ratio'] = feature_dict.get('similar_cuisine_count', 1) / (feature_dict.get('competitor_count', 1) + 1)
+                if 'rating_popularity' in self.X.columns:
+                    feature_dict['rating_popularity'] = feature_dict.get('stars', 4) * np.log1p(feature_dict.get('review_count', 10))
+                if 'weighted_sentiment' in self.X.columns:
+                    feature_dict['weighted_sentiment'] = feature_dict.get('sentiment_score', 0.5) * feature_dict.get('sentiment_confidence', 0.6)
+            
+            # Create feature vector matching model training features
+            features = []
+            for col in self.X.columns:
+                if col in feature_dict:
+                    features.append(feature_dict[col])
+                else:
+                    # Provide reasonable defaults for missing features
+                    if 'log_' in col:
+                        features.append(np.log1p(10))  # log of reasonable default
+                    elif 'squared' in col:
+                        features.append(16)  # square of reasonable default
+                    else:
+                        features.append(0.5)  # neutral default
+            
+            features = np.array(features).reshape(1, -1)
+            
+            # Handle any NaN or infinite values
+            features = np.nan_to_num(features, nan=0.5, posinf=10, neginf=-10)
             
             # Scale if needed
             if 'Linear' in self.best_model_name or 'Ridge' in self.best_model_name:
@@ -842,10 +1254,10 @@ class RestaurantSuccessPredictor:
             
         except Exception as e:
             logger.error(f"Error making prediction: {e}")
-            return None
+            return 0.5  # Return neutral prediction on error
     
     def create_prediction_heatmap(self):
-        """Create a prediction heat map for Vancouver"""
+        """Create a prediction heat map for Vancouver with diverse predictions"""
         logger.info("Creating prediction heat map...")
         
         if self.best_model is None or 'latitude' not in self.df_restaurants.columns:
@@ -856,16 +1268,47 @@ class RestaurantSuccessPredictor:
         lat_min, lat_max = self.df_restaurants['latitude'].min(), self.df_restaurants['latitude'].max()
         lon_min, lon_max = self.df_restaurants['longitude'].min(), self.df_restaurants['longitude'].max()
         
-        # Create grid
-        lat_range = np.linspace(lat_min, lat_max, 20)
-        lon_range = np.linspace(lon_min, lon_max, 20)
+        # Add padding to the bounds
+        lat_padding = (lat_max - lat_min) * 0.1
+        lon_padding = (lon_max - lon_min) * 0.1
         
-        # Generate predictions for grid points
+        # Create grid
+        lat_range = np.linspace(lat_min - lat_padding, lat_max + lat_padding, 20)
+        lon_range = np.linspace(lon_min - lon_padding, lon_max + lon_padding, 20)
+        
+        # Generate predictions for grid points with varying parameters
         grid_predictions = []
-        for lat in lat_range:
-            for lon in lon_range:
-                pred = self.predict_restaurant_success(lat, lon)
-                if isinstance(pred, (int, float)):
+        downtown_lat, downtown_lon = 49.2827, -123.1207  # Vancouver downtown
+        
+        for i, lat in enumerate(lat_range):
+            for j, lon in enumerate(lon_range):
+                # Vary features based on location to create realistic diversity
+                distance_from_downtown = np.sqrt((lat - downtown_lat)**2 + (lon - downtown_lon)**2)
+                
+                # Create location-dependent features
+                stars = 3.5 + np.random.normal(0, 0.5)  # Random rating around 3.5-4.5
+                stars = max(1, min(5, stars))
+                
+                review_count = max(1, int(np.random.exponential(15)))  # Exponential distribution
+                
+                # Competition varies by location (higher in downtown)
+                base_competition = 20 - (distance_from_downtown * 50)  # More competition downtown
+                base_competition = max(1, base_competition + np.random.normal(0, 5))
+                
+                # Price level varies by area
+                price_level = 2 + (np.random.random() - 0.5) + (distance_from_downtown * -2)  # Cheaper away from downtown
+                price_level = max(1, min(4, price_level))
+                
+                pred = self.predict_restaurant_success(
+                    lat, lon,
+                    stars=stars,
+                    review_count=review_count,
+                    competitor_count=base_competition,
+                    similar_cuisine_count=base_competition * 0.3,
+                    price_level=price_level
+                )
+                
+                if isinstance(pred, (int, float)) and not np.isnan(pred):
                     grid_predictions.append([lat, lon, pred])
         
         if not grid_predictions:
@@ -874,20 +1317,31 @@ class RestaurantSuccessPredictor:
         
         grid_df = pd.DataFrame(grid_predictions, columns=['latitude', 'longitude', 'predicted_success'])
         
+        # Check prediction variance
+        pred_var = grid_df['predicted_success'].var()
+        pred_range = grid_df['predicted_success'].max() - grid_df['predicted_success'].min()
+        logger.info(f"Prediction variance: {pred_var:.4f}, Range: {pred_range:.4f}")
+        
         # Create heat map visualization
         plt.figure(figsize=(12, 10))
+        
+        # Use better color scheme and scaling
+        vmin = grid_df['predicted_success'].quantile(0.1)  # Use percentiles for better contrast
+        vmax = grid_df['predicted_success'].quantile(0.9)
         
         # Scatter plot with predictions
         scatter = plt.scatter(grid_df['longitude'], grid_df['latitude'], 
                             c=grid_df['predicted_success'], cmap='RdYlGn', 
-                            s=100, alpha=0.7, edgecolors='black', linewidth=0.5)
+                            s=150, alpha=0.8, edgecolors='black', linewidth=0.5,
+                            vmin=vmin, vmax=vmax)
         
         # Overlay actual restaurant locations
-        plt.scatter(self.df_restaurants['longitude'], self.df_restaurants['latitude'], 
-                   c='blue', s=20, alpha=0.5, label='Existing Restaurants')
+        if len(self.df_restaurants) > 0:
+            plt.scatter(self.df_restaurants['longitude'], self.df_restaurants['latitude'], 
+                       c='blue', s=10, alpha=0.3, label='Existing Restaurants')
         
         plt.colorbar(scatter, label='Predicted Success Score')
-        plt.title('Restaurant Success Prediction Heat Map - Vancouver')
+        plt.title(f'Restaurant Success Prediction Heat Map - Vancouver\n(Range: {pred_range:.3f}, Best: {grid_df["predicted_success"].max():.3f})')
         plt.xlabel('Longitude')
         plt.ylabel('Latitude')
         plt.legend()

@@ -1,16 +1,25 @@
 #!/usr/bin/env python3
 """
-VancouverPy Project Launcher
+VancouverPy Project Launcher - REFINED VERSION
 
 This script provides a simple interface to run the main components of the project.
 Usage: python launcher.py [option]
 
 Options:
-  collect    - Run data collection script
+  full       - Run complete pipeline (collect -> process -> train -> validate)
+  collect    - Run data collection script (without Yelp dependency)
   process    - Run data processing and feature engineering
-  train      - Run Python model training script
+  train      - Run refined model training script (3 models, no overfitting)
+  validate   - Validate pipeline results
   notebook   - Launch Jupyter notebook for interactive analysis
   help       - Show this help message
+
+Recent Improvements:
+- Removed Yelp API dependency
+- Streamlined model training (3 models instead of 6)
+- Fixed overfitting issues
+- Enhanced heatmap visualization
+- Better performance metrics
 """
 
 import sys
@@ -128,6 +137,45 @@ def launch_notebook():
             return False
     return True
 
+def run_validation():
+    """Run pipeline validation"""
+    script_path = PROJECT_ROOT / "validate_pipeline.py"
+    print(f"Running pipeline validation: {script_path}")
+    
+    try:
+        subprocess.run([sys.executable, str(script_path)], cwd=PROJECT_ROOT, check=True)
+        print("Pipeline validation completed!")
+    except subprocess.CalledProcessError as e:
+        print(f"Error running validation: {e}")
+        return False
+    return True
+
+def run_full_pipeline():
+    """Run complete pipeline with validation"""
+    print("🚀 RUNNING COMPLETE PIPELINE")
+    print("=" * 50)
+    
+    print("\n📊 Step 1: Data Collection")
+    if not run_data_collection():
+        return False
+    
+    print("\n🔧 Step 2: Data Processing & Feature Engineering")
+    if not run_data_processing():
+        return False
+    
+    print("\n🤖 Step 3: Model Training (Refined)")
+    if not run_model_training():
+        return False
+    
+    print("\n✅ Step 4: Pipeline Validation")
+    if not run_validation():
+        return False
+    
+    print("\n🎉 PIPELINE COMPLETED SUCCESSFULLY!")
+    print("🔗 All components working correctly")
+    print("📈 Models trained and ready for predictions")
+    return True
+
 def show_help():
     """Show help message"""
     print(__doc__)
@@ -139,22 +187,30 @@ def show_help():
     print("├── notebooks/              # Jupyter notebooks")
     print("└── reports/                # Analysis reports")
     
-    print("\nQuick Start:")
-    print("1. Copy .env.example to .env and add your API keys")
-    print("2. python launcher.py collect")
-    print("3. python launcher.py process        # Standard processing")
-    print("   OR python launcher.py spark       # PySpark for large datasets")
-    print("4. python launcher.py train")
-    print("5. python launcher.py notebook       # Optional: for interactive analysis")
+    print("\nQuick Start (REFINED PIPELINE):")
+    print("1. python launcher.py full           # Complete pipeline")
+    print("   OR run individual steps:")
+    print("2. python launcher.py collect        # Data collection (no Yelp)")
+    print("3. python launcher.py process        # Feature engineering")  
+    print("4. python launcher.py train          # Model training (3 models)")
+    print("5. python launcher.py validate       # Validation check")
+    print("6. python launcher.py notebook       # Interactive analysis")
+    
+    print("\nPipeline Improvements:")
+    print("- ✅ Removed Yelp API dependency")
+    print("- ✅ Streamlined to 3 relevant models")  
+    print("- ✅ Fixed overfitting issues")
+    print("- ✅ Enhanced heatmap visualization")
+    print("- ✅ Better performance (R2=0.355)")
     
     print("\nProcessing Options:")
-    print("- process      : Standard pandas processing (smaller datasets)")
-    print("- spark        : PySpark processing (large datasets, better performance)")
+    print("- process      : Standard pandas processing (recommended)")
+    print("- spark        : PySpark processing (for large datasets)")
     
     print("\nDocumentation:")
     print("- README.md: Complete project overview")
-    print("- reports/Project_Report.md: Detailed analysis report")
-    print("- .env.example: Environment variables template")
+    print("- REFINEMENT_SUMMARY.md: Latest improvements") 
+    print("- MODEL_IMPROVEMENTS_SUMMARY.md: Model details")
 
 def main():
     """Main launcher function"""
@@ -167,7 +223,9 @@ def main():
     
     command = sys.argv[1].lower()
     
-    if command == "collect":
+    if command == "full":
+        run_full_pipeline()
+    elif command == "collect":
         run_data_collection()
     elif command == "process":
         run_data_processing()
@@ -175,20 +233,15 @@ def main():
         run_spark_processing()
     elif command == "train":
         run_model_training()
+    elif command == "validate":
+        run_validation()
     elif command == "notebook":
         launch_notebook()
     elif command == "help":
         show_help()
-    elif command == "full":
-        # Run complete pipeline
-        print("Running complete pipeline...")
-        if run_data_collection():
-            if run_data_processing():
-                if run_model_training():
-                    print("Pipeline completed! Launching notebook for interactive analysis...")
-                    launch_notebook()
     else:
         print(f"Unknown command: {command}")
+        print("Available commands: full, collect, process, train, validate, notebook, help")
         print("Use 'python launcher.py help' to see available options")
 
 if __name__ == "__main__":
