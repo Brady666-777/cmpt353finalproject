@@ -248,11 +248,27 @@ class RealDataProcessor:
         return df_combined
     
     def geocode_addresses(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Geocode addresses to get coordinates"""
-        logger.info("Geocoding addresses...")
+        """Geocode addresses to get coordinates with caching"""
+        logger.info("Geocoding addresses with caching...")
         
         from geopy.geocoders import Nominatim
         from geopy.exc import GeocoderTimedOut, GeocoderServiceError
+        import pickle
+        from pathlib import Path
+        
+        # Set up cache file
+        cache_file = Path(self.processed_data_dir) / 'geocode_cache.pkl'
+        
+        # Load existing cache
+        cache = {}
+        if cache_file.exists():
+            try:
+                with open(cache_file, 'rb') as f:
+                    cache = pickle.load(f)
+                logger.info(f"Loaded geocoding cache with {len(cache)} addresses")
+            except Exception as e:
+                logger.warning(f"Could not load cache: {e}")
+                cache = {}
         
         geolocator = Nominatim(user_agent="vancouvepy_restaurant_predictor")
         
@@ -265,31 +281,71 @@ class RealDataProcessor:
             return df_geo
         
         successful_geocodes = 0
+        cache_hits = 0
+        new_geocodes = 0
         
         for idx, row in df_geo.iterrows():
             if idx % 20 == 0:
-                logger.info(f"Geocoded {idx}/{len(df_geo)} addresses...")
+                logger.info(f"Processed {idx}/{len(df_geo)} addresses (Cache hits: {cache_hits}, New geocodes: {new_geocodes})...")
             
             try:
                 address = row['full_address']
                 if pd.notna(address):
-                    # Add rate limiting
-                    time.sleep(1)
+                    # Clean address for consistent caching
+                    address_clean = str(address).strip().lower()
+                    
+                    # Check cache first
+                    if address_clean in cache:
+                        # Use cached result
+                        cached_result = cache[address_clean]
+                        if cached_result and 'lat' in cached_result and 'lon' in cached_result:
+                            df_geo.loc[idx, 'latitude'] = cached_result['lat']
+                            df_geo.loc[idx, 'longitude'] = cached_result['lon']
+                            successful_geocodes += 1
+                            cache_hits += 1
+                        continue
+                    
+                    # Not in cache, geocode it
+                    time.sleep(0.01)  # Rate limiting
                     
                     location = geolocator.geocode(address, timeout=10)
                     if location:
+                        # Store successful result
                         df_geo.loc[idx, 'latitude'] = location.latitude
                         df_geo.loc[idx, 'longitude'] = location.longitude
+                        
+                        # Cache the result
+                        cache[address_clean] = {
+                            'lat': location.latitude,
+                            'lon': location.longitude,
+                            'original_address': address
+                        }
+                        
                         successful_geocodes += 1
+                        new_geocodes += 1
+                    else:
+                        # Cache failed result to avoid retrying
+                        cache[address_clean] = None
                     
             except (GeocoderTimedOut, GeocoderServiceError) as e:
                 logger.warning(f"Geocoding failed for address {address}: {e}")
+                # Cache failed result
+                address_clean = str(address).strip().lower()
+                cache[address_clean] = None
                 continue
             except Exception as e:
                 logger.warning(f"Unexpected error geocoding {address}: {e}")
                 continue
         
-        logger.info(f"Successfully geocoded {successful_geocodes}/{len(df_geo)} addresses")
+        # Save updated cache
+        try:
+            with open(cache_file, 'wb') as f:
+                pickle.dump(cache, f)
+            logger.info(f"Saved geocoding cache with {len(cache)} addresses")
+        except Exception as e:
+            logger.warning(f"Could not save cache: {e}")
+        
+        logger.info(f"Geocoding complete: {successful_geocodes} successful ({cache_hits} from cache, {new_geocodes} new geocodes)")
         
         # Filter out rows without coordinates
         df_geo = df_geo.dropna(subset=['latitude', 'longitude'])

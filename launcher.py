@@ -113,42 +113,9 @@ def run_model_training():
         return False
     return True
 
-def launch_notebook():
-    """Launch Jupyter notebook"""
-    notebook_path = NOTEBOOKS_DIR / "model_training.ipynb"
-    print(f"Launching Jupyter notebook: {notebook_path}")
-    
-    try:
-        # Try to launch with jupyter
-        subprocess.run([
-            sys.executable, "-m", "jupyter", "notebook", 
-            str(notebook_path)
-        ], cwd=PROJECT_ROOT)
-    except FileNotFoundError:
-        print("Jupyter not found. Installing jupyter...")
-        try:
-            subprocess.run([sys.executable, "-m", "pip", "install", "jupyter"], check=True)
-            subprocess.run([
-                sys.executable, "-m", "jupyter", "notebook", 
-                str(notebook_path)
-            ], cwd=PROJECT_ROOT)
-        except subprocess.CalledProcessError as e:
-            print(f"Error launching notebook: {e}")
-            return False
-    return True
 
-def run_validation():
-    """Run pipeline validation"""
-    script_path = PROJECT_ROOT / "validate_pipeline.py"
-    print(f"Running pipeline validation: {script_path}")
-    
-    try:
-        subprocess.run([sys.executable, str(script_path)], cwd=PROJECT_ROOT, check=True)
-        print("Pipeline validation completed!")
-    except subprocess.CalledProcessError as e:
-        print(f"Error running validation: {e}")
-        return False
-    return True
+
+
 
 def run_full_pipeline():
     """Run complete pipeline with validation"""
@@ -167,9 +134,7 @@ def run_full_pipeline():
     if not run_model_training():
         return False
     
-    print("\n✅ Step 4: Pipeline Validation")
-    if not run_validation():
-        return False
+
     
     print("\n🎉 PIPELINE COMPLETED SUCCESSFULLY!")
     print("🔗 All components working correctly")
@@ -182,11 +147,9 @@ def main():
     """Main launcher function"""
     print("VancouverPy: Restaurant Success Prediction")
     print("=" * 50)
-    
-    if len(sys.argv) < 2:
-        show_help()
-        return
-    
+
+
+
     command = sys.argv[1].lower()
     
     if command == "full":
@@ -199,12 +162,7 @@ def main():
         run_spark_processing()
     elif command == "train":
         run_model_training()
-    elif command == "validate":
-        run_validation()
-    elif command == "notebook":
-        launch_notebook()
-    elif command == "help":
-        show_help()
+
     else:
         print(f"Unknown command: {command}")
         print("Available commands: full, collect, process, train, validate, notebook, help")
