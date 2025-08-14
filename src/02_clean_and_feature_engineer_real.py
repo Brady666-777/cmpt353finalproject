@@ -3,13 +3,13 @@ Updated Data Processing Script for Real VancouverPy Data
 
 This script processes the actual datasets provided:
 - business-licences.geojson (Vancouver business licenses)
-- CensusProfile2021-ProfilRecensement2021-20250811051126.csv (Census data)
+- CensusProfile2021-ProfilRecensement2021-20250811051126.csv (Census data)(existing)
 - good-restaurant-in-vancouver-overview.csv (Google restaurant data)
 - dataset_crawler-google-review_2025-08-06_03-55-37-484.csv (Google reviews data)
 
 Includes inline sentiment analysis for enhanced feature engineering.
 
-Author: VancouverPy Project Team
+Author: Ruiyang Wu
 Date: August 2025
 """
 

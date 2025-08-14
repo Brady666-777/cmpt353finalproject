@@ -6,7 +6,7 @@ This script handles the organization and validation of existing data files:
 - Census data (existing CSV file) 
 - Restaurant data (existing CSV files)
 
-Author: VancouverPy Project Team
+Author: ruiyang wu
 Date: August 2025
 """
 
